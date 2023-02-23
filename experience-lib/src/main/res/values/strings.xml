@@ -80,4 +80,6 @@
     <string name="tap_to_details">Tap on the image to highlight the details</string>
     <string name="details_message_hint">Find the gothic columns</string>
     <string name="details_missing">Select the details to find</string>
+
+    <string name="msg_internet_non_disponibile">Internet is not available</string>
 </resources>
