@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+experience-lib/src/main/res/values/env.xml
