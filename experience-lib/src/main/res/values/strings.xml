@@ -1,3 +1,83 @@
 <resources>
-    <string name="app_name">experience-lib</string>
+    <string name="app_name" translatable="false">experience-lib</string>
+
+    <!-- Experience -->
+    <string name="add_experience">+ Add Experience</string>
+    <string name="add_experience_title">Select the type of Experience or import it</string>
+    <string name="import_experience">Import from file</string>
+    <string name="import_experience_error">An error has occurred during the import</string>
+    <string name="quiz" translatable="false">Quiz</string>
+    <string name="added_questions">Added questions</string>
+    <string name="no_questions_available">There aren\'t questions here, add one by clicking +</string>
+    <string name="puzzle" translatable="false">Puzzle</string>
+    <string name="find_the_difference">Find the difference</string>
+    <string name="diff_low">Low</string>
+    <string name="diff_medium">Medium</string>
+    <string name="diff_high">High</string>
+    <string name="diff_impossible">Impossible</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="score">Score</string>
+    <string name="points">Points</string>
+    <string name="time">Time</string>
+    <string name="minutes">Minutes</string>
+    <string name="time_invalid">Insert a minimum time of 10 seconds</string>
+    <string name="seconds">Seconds</string>
+    <string name="question">Question</string>
+    <string name="add_image">+ Add image</string>
+    <string name="add_original_image">+ Add original image</string>
+    <string name="add_different_image">+ Add modified image</string>
+    <string name="select_difference_explanation">Tap on the image to select the differences</string>
+    <string name="answers">Answers</string>
+    <string name="answer">Answer</string>
+    <string name="insert_answer">Insert the answer</string>
+    <string name="empty_answer">Answers missing</string>
+    <string name="correct">Correct</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="questions_empty">Insert the question in all languages</string>
+    <string name="points_missing">Insert a score</string>
+    <string name="answers_missing">Insert at least two answers</string>
+    <string name="correct_answer_missing">Insert at least one correct answer</string>
+    <string name="incorrect_answer_missing">Insert at least one incorrect answer</string>
+    <string name="questions_missing">Add at least a question</string>
+    <string name="experience_saved">The Experience is saved correctly</string>
+    <string name="experience_save_error">An error has occurred during the save of this Experience</string>
+    <string name="image_cropped">The image will be cropped to make it square</string>
+    <string name="grid_dimension">Grid dimension</string>
+    <string name="puzzle_image_missing">Image is missing</string>
+    <string name="insert_correct_grid_dimension">Insert a correct grid dimension</string>
+    <string name="enable_rotation">Enable pieces rotation</string>
+    <string name="difficulty_value">Difficulty: %1$s</string>
+    <string name="points_value">Points: %1$d</string>
+    <string name="exit_confirmation">Do you want to really exit? Unsaved changes will be lost.</string>
+    <string name="yes_exit">Yes, exit</string>
+    <string name="no_continue">No, continue</string>
+    <string name="open">Open</string>
+    <string name="delete_experience">Delete</string>
+    <string name="share_experience">Share</string>
+    <string name="share_error">An error has occurred during the sharing</string>
+    <string name="confirm_delete">Do you really want to delete this item?</string>
+    <string name="yes_delete">Yes, delete</string>
+    <string name="no">No</string>
+    <string name="deleted_experience">Experience deleted successfully</string>
+    <string name="deleted_question">Question deleted successfully</string>
+    <string name="deleted_answer">Answer deleted successfully</string>
+    <string name="experience_deleted_error">An error occurred</string>
+    <string name="ftd_original_image_missing">The original image is missing</string>
+    <string name="ftd_different_image_missing">The modified image is missing</string>
+    <string name="ftd_differnces_missing">Select the differences between the images</string>
+    <string name="find_rfid">Find RFID tag</string>
+    <string name="insert_message">Insert your hint message</string>
+    <string name="message_tooltip">The most famous painting of Salvador Dalì…</string>
+    <string name="insert_rfid_code">Insert RFID code in UUID format</string>
+    <string name="message_missing">Insert the message in all languages</string>
+    <string name="rfid_code_missing">Insert RFID code</string>
+    <string name="rfid_code_wrong_format">Insert a correct RFID code</string>
+    <string name="pattern">Memorize the pattern</string>
+    <string name="touch_dot">Touch the dots to specify a pattern</string>
+    <string name="dot_number_error">Selected dots should be at least 3</string>
+    <string name="find_details">Find details</string>
+    <string name="tap_to_details">Tap on the image to highlight the details</string>
+    <string name="details_message_hint">Find the gothic columns</string>
+    <string name="details_missing">Select the details to find</string>
 </resources>
