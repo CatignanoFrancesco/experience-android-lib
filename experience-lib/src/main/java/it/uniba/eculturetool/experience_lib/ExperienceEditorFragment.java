@@ -1,5 +1,6 @@
 package it.uniba.eculturetool.experience_lib;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -62,8 +63,11 @@ public class ExperienceEditorFragment extends Fragment {
         experience = viewModel.getExperience().getValue();
         if(experience == null) return;
 
-        viewModel.getExperience().observe(requireActivity(), experience -> {
-            if(experience instanceof Quiz) pointsTextInput.setEnabled(false);
+        viewModel.getExperience().observe(requireActivity(), new Observer<Experience>() {
+            @Override
+            public void onChanged(Experience experience) {
+                if(experience instanceof Quiz) pointsTextInput.setEnabled(false);
+            }
         });
 
         pointsTextInput.addTextChangedListener(new TextWatcher() {
@@ -86,10 +90,13 @@ public class ExperienceEditorFragment extends Fragment {
     }
 
     private void setDifficulty() {
-        difficultySlider.addOnChangeListener((slider, value, fromUser) -> {
-            Difficulty difficulty = Difficulty.valueOf((int) value);
-            difficultyValue.setText(difficulty.toString(requireContext()));
-            if(experience != null) experience.setDifficulty(difficulty);
+        difficultySlider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                Difficulty difficulty = Difficulty.valueOf((int) value);
+                difficultyValue.setText(difficulty.toString(requireContext()));
+                if(experience != null) experience.setDifficulty(difficulty);
+            }
         });
 
         if(experience != null) {
