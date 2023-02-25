@@ -45,9 +45,9 @@ public class ExperienceEditorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
 
-        pointsTextInput = view.findViewById(ui.experienceEditorFragmentUI.pointsInputTextId);
-        difficultySlider = view.findViewById(ui.experienceEditorFragmentUI.difficultySliderId);
-        difficultyValue = view.findViewById(ui.experienceEditorFragmentUI.difficultyValueTextViewId);
+        pointsTextInput = (TextInputEditText) view.findViewById(ui.experienceEditorFragmentUI.pointsInputTextId);
+        difficultySlider = (Slider) view.findViewById(ui.experienceEditorFragmentUI.difficultySliderId);
+        difficultyValue = (TextView) view.findViewById(ui.experienceEditorFragmentUI.difficultyValueTextViewId);
     }
 
     @Override

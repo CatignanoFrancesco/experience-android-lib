@@ -15,13 +15,13 @@
         android:theme="@style/Theme.ExperienceLibrary">
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
+            android:name="it.uniba.eculturetool.experience_lib.utils.EctExpLibFileProvider"
+            android:authorities="${applicationId}.ectl_provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_path" />
+                android:resource="@xml/ectl_provider_path" />
         </provider>
 
     </application>

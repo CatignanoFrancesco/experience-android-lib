@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
@@ -31,6 +30,7 @@ import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
 import it.uniba.eculturetool.experience_lib.saving.ExperienceFileParser;
 import it.uniba.eculturetool.experience_lib.ui.ExperienceUI;
+import it.uniba.eculturetool.experience_lib.utils.EctExpLibFileProvider;
 
 public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.ExperienceViewHolder> {
     private final ExperienceUI ui = ExperienceUI.getInstance();
@@ -126,7 +126,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
                         // Esportazione
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_SEND);
-                        intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(activity, "it.uniba.eculturetool.experience_lib.provider", file));
+                        intent.putExtra(Intent.EXTRA_STREAM, EctExpLibFileProvider.getUriForFile(activity, "it.uniba.eculturetool.experience_lib.ectl_provider", file));
                         intent.setType("application/json");
                         activity.startActivity(Intent.createChooser(intent, null));
                     }
