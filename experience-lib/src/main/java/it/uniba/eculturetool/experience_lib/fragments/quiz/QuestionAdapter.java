@@ -71,7 +71,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView questionText;
         ImageView questionImage;
-        ConstraintLayout constraintLayout;
+        View constraintLayout;
         Question question;
 
         public QuestionViewHolder(@NonNull View itemView) {

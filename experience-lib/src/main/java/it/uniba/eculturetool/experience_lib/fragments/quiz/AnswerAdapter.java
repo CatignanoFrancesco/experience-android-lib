@@ -82,7 +82,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     class AnswerViewHolder extends RecyclerView.ViewHolder {
         TextView answerTextView;
-        ConstraintLayout layout;
+        View layout;
 
         public AnswerViewHolder(@NonNull View itemView) {
             super(itemView);
