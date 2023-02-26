@@ -72,10 +72,12 @@ public class PatternFragment extends Fragment {
         experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
 
         Set<Experience> experiences = dataHolder.getExperienceByOperaId(operaId);
-        for(Experience experience : experiences) {
-            if(experience.getId().equals(experienceId)) {
-                viewModel.setPattern((Pattern) experience);
-                break;
+        if(experiences != null) {
+            for(Experience experience : experiences) {
+                if(experience.getId().equals(experienceId)) {
+                    viewModel.setPattern((Pattern) experience);
+                    break;
+                }
             }
         }
         experienceViewModel.setExperience(viewModel.getPattern().getValue());
