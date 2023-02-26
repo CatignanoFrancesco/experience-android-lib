@@ -100,10 +100,12 @@ public class FindRfidFragment extends Fragment {
         experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
 
         Set<Experience> experiences = dataHolder.getExperienceByOperaId(operaId);
-        for(Experience experience : experiences) {
-            if(experience.getId().equals(experienceId)) {
-                viewModel.setFindRfid((FindRFID) experience);
-                break;
+        if(experiences != null) {
+            for (Experience experience : experiences) {
+                if (experience.getId().equals(experienceId)) {
+                    viewModel.setFindRfid((FindRFID) experience);
+                    break;
+                }
             }
         }
         experienceViewModel.setExperience(viewModel.getFindRfid().getValue());
