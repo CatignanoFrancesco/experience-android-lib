@@ -5,6 +5,9 @@
     <string name="add_experience">+ Add Experience</string>
     <string name="add_experience_title">Select the type of Experience or import it</string>
     <string name="import_experience">Import from file</string>
+    <string name="warning">Warning!</string>
+    <string name="error_selection">The Experience you selected has already been added</string>
+    <string name="understand">Ho capito</string>
     <string name="import_experience_error">An error has occurred during the import</string>
     <string name="quiz" translatable="false">Quiz</string>
     <string name="added_questions">Added questions</string>

@@ -4,6 +4,9 @@
     <string name="add_experience">+ Aggiungi un\'Experience</string>
     <string name="add_experience_title">Seleziona il tipo di Experience o importala</string>
     <string name="import_experience">Importa da un file</string>
+    <string name="warning">Attenzione!</string>
+    <string name="error_selection">L\'Experience che stai selezionando è stata già creata</string>
+    <string name="understand">I understand</string>
     <string name="import_experience_error">Si è verificato un errore durante l\'importazione</string>
     <string name="added_questions">Domande aggiunte</string>
     <string name="no_questions_available">Non ci sono domande, aggiungine una cliccando il pulsante +</string>
