@@ -184,6 +184,11 @@ public class FindTheDifferenceFragment extends Fragment {
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            // Pulisco le coordinate perchè non devono essere più disegnate una volta che è stata aggiunta una nuova immagine
+                            if(differentBitmap != null) {    // Se bitmap è nullo, vuol dire che è la prima volta che viene caricata l'immagine
+                                findTheDifference.getDifferencesCoordinates().clear();
+                            }
+
                             differentBitmap = ((BitmapDrawable) resource).getBitmap();
                             differentImageView.setImageBitmap(differentBitmap);
                             findTheDifference.setDifferentImage(differentBitmap);

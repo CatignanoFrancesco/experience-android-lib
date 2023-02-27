@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -185,6 +186,11 @@ public class FindDetailsFragment extends Fragment {
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            // Pulisco le coordinate perchè non devono essere più disegnate una volta che è stata aggiunta una nuova immagine
+                            if(bitmap != null) {    // Se bitmap è nullo, vuol dire che è la prima volta che viene caricata l'immagine
+                                findDetails.getCoordinates().clear();
+                            }
+
                             bitmap = ((BitmapDrawable) resource).getBitmap();
                             imageView.setImageBitmap(bitmap);
                             findDetails.setImage(bitmap);
