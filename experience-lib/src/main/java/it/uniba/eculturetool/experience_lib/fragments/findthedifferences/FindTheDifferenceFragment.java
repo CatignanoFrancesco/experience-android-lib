@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class FindTheDifferenceFragment extends Fragment {
     private String findTheDifferenceId;
 
     private ImageView originalImageView, differentImageView;
+    private Bitmap differentBitmap;
     private Button addOriginalImageButton, addDifferentImageButton, saveButton;
     private ActivityResultLauncher<Intent> pickPhoto;
 
@@ -182,9 +184,9 @@ public class FindTheDifferenceFragment extends Fragment {
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
-                            differentImageView.setImageBitmap(bitmap);
-                            findTheDifference.setDifferentImage(bitmap);
+                            differentBitmap = ((BitmapDrawable) resource).getBitmap();
+                            differentImageView.setImageBitmap(differentBitmap);
+                            findTheDifference.setDifferentImage(differentBitmap);
 
                             List<Coordinate> coordinates = findTheDifference.getDifferencesCoordinates();
                             if(findTheDifference.getDifferentImage() != null && coordinates != null && !coordinates.isEmpty()) {    // Il trigger viene chiamato due volte. La prima è quando si avvalora l'oggetto ftd e la seconda è quando viene inserita l'immagine
@@ -217,8 +219,8 @@ public class FindTheDifferenceFragment extends Fragment {
     }
 
     private void drawCircle(int x, int y) {
-        Bitmap bitmap = ((BitmapDrawable) differentImageView.getDrawable()).getBitmap();
-        Bitmap tempBitmap = Bitmap.createBitmap(differentImageView.getWidth(), differentImageView.getHeight(), Bitmap.Config.ARGB_8888);
+        differentBitmap = ((BitmapDrawable) differentImageView.getDrawable()).getBitmap();
+        Bitmap tempBitmap = Bitmap.createBitmap(differentBitmap.getWidth(), differentBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
@@ -226,7 +228,7 @@ public class FindTheDifferenceFragment extends Fragment {
         paint.setStrokeWidth(10);
 
         Canvas canvas = new Canvas(tempBitmap);
-        canvas.drawBitmap(bitmap, 0, 0, null);
+        canvas.drawBitmap(differentBitmap, 0, 0, null);
         canvas.drawCircle(x, y, MARGIN*2, paint);
         differentImageView.setImageBitmap(tempBitmap);
     }

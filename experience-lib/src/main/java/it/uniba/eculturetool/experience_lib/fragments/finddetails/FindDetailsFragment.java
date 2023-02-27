@@ -75,6 +75,7 @@ public class FindDetailsFragment extends Fragment {
     private ImageButton translateButton;
     private ChipGroup languageChipGroup;
     private ImageView imageView;
+    private Bitmap bitmap;
     private Button addImageButton;
     private Button saveButton;
 
@@ -184,7 +185,7 @@ public class FindDetailsFragment extends Fragment {
 
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            Bitmap bitmap = ((BitmapDrawable) resource).getBitmap();
+                            bitmap = ((BitmapDrawable) resource).getBitmap();
                             imageView.setImageBitmap(bitmap);
                             findDetails.setImage(bitmap);
 
@@ -218,8 +219,8 @@ public class FindDetailsFragment extends Fragment {
     }
 
     private void drawCircle(int x, int y) {
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        Bitmap tempBitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(), Bitmap.Config.ARGB_8888);
+        bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        Bitmap tempBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
