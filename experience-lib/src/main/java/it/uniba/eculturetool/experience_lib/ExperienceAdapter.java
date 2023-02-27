@@ -147,7 +147,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     class ExperienceViewHolder extends RecyclerView.ViewHolder {
         ImageView typeImage;
         TextView typeText, difficultyText, pointsText;
-        ConstraintLayout layout;
+        View layout;
 
         public ExperienceViewHolder(@NonNull View itemView) {
             super(itemView);
