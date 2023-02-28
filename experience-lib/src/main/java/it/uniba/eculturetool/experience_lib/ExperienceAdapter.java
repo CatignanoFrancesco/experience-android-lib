@@ -40,9 +40,13 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     private OnOpenListener<Experience> onOpenListener;
     private OnClickDeleteListener<Experience> onClickDeleteListener;
 
-    public ExperienceAdapter(Activity activity, List<Experience> experiences, OnOpenListener<Experience> onOpenListener, OnClickDeleteListener<Experience> onClickDeleteListener) {
+    public ExperienceAdapter(Activity activity, List<Experience> experiences) {
         this.activity = activity;
         this.experiences = experiences;
+    }
+
+    public ExperienceAdapter(Activity activity, List<Experience> experiences, OnOpenListener<Experience> onOpenListener, OnClickDeleteListener<Experience> onClickDeleteListener) {
+        this(activity, experiences);
         this.onClickDeleteListener = onClickDeleteListener;
         this.onOpenListener = onOpenListener;
     }
@@ -92,50 +96,56 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         }
 
         // Click
-        holder.layout.setOnClickListener(v -> onOpenListener.onOpen(experience));
-        holder.layout.setOnCreateContextMenuListener(new ExperienceContextMenuListener<>(
-                activity,
-                holder.getAdapterPosition(),
-                experience,
-                onOpenListener,
-                () -> {
-                    experiences.remove(experience);
-                    onClickDeleteListener.onClickDelete(experience);
-                    notifyDataSetChanged();
-                },
-                item -> {
-                    try {
-                        // Directory
-                        File dir = new File(activity.getFilesDir(), "experiences");
-                        if(!dir.exists()) dir.mkdirs();
+        if(onOpenListener == null || onClickDeleteListener == null) {
+            holder.layout.setClickable(false);
+        } else {
+            holder.layout.setClickable(true);
 
-                        // Creazione del file
-                        File file;
-                        int i = 0;
-                        do {
-                            file = new File(dir, experience.getClass().getSimpleName() + (i==0 ? "" : i) + ".json");
-                            i++;
-                        } while (file.exists());
+            holder.layout.setOnClickListener(v -> onOpenListener.onOpen(experience));
+            holder.layout.setOnCreateContextMenuListener(new ExperienceContextMenuListener<>(
+                    activity,
+                    holder.getAdapterPosition(),
+                    experience,
+                    onOpenListener,
+                    () -> {
+                        experiences.remove(experience);
+                        onClickDeleteListener.onClickDelete(experience);
+                        notifyDataSetChanged();
+                    },
+                    item -> {
+                        try {
+                            // Directory
+                            File dir = new File(activity.getFilesDir(), "experiences");
+                            if(!dir.exists()) dir.mkdirs();
 
-                        // Inserimento dei dati nel file
-                        FileWriter writer = new FileWriter(file);
-                        writer.append(ExperienceFileParser.toJson(experience));
-                        writer.flush();
-                        writer.close();
+                            // Creazione del file
+                            File file;
+                            int i = 0;
+                            do {
+                                file = new File(dir, experience.getClass().getSimpleName() + (i==0 ? "" : i) + ".json");
+                                i++;
+                            } while (file.exists());
 
-                        // Esportazione
-                        Intent intent = new Intent();
-                        intent.setAction(Intent.ACTION_SEND);
-                        intent.putExtra(Intent.EXTRA_STREAM, EctExpLibFileProvider.getUriForFile(activity, "it.uniba.eculturetool.experience_lib.ectl_provider", file));
-                        intent.setType("application/json");
-                        activity.startActivity(Intent.createChooser(intent, null));
+                            // Inserimento dei dati nel file
+                            FileWriter writer = new FileWriter(file);
+                            writer.append(ExperienceFileParser.toJson(experience));
+                            writer.flush();
+                            writer.close();
+
+                            // Esportazione
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_STREAM, EctExpLibFileProvider.getUriForFile(activity, "it.uniba.eculturetool.experience_lib.ectl_provider", file));
+                            intent.setType("application/json");
+                            activity.startActivity(Intent.createChooser(intent, null));
+                        }
+                        catch (IOException e) {
+                            Log.e(ExperienceAdapter.class.getSimpleName(), "onBindViewHolder: ", e);
+                            Toast.makeText(activity, activity.getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    catch (IOException e) {
-                        Log.e(ExperienceAdapter.class.getSimpleName(), "onBindViewHolder: ", e);
-                        Toast.makeText(activity, activity.getString(R.string.share_error), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ));
+            ));
+        }
     }
 
     @Override
