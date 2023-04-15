@@ -56,8 +56,12 @@ public class ExperienceFileParser {
         StringBuilder sb = new StringBuilder();
         for(String line; (line = bufferedReader.readLine()) != null;) sb.append(line);
 
+        return toExperience(sb.toString());
+    }
+
+    public static Experience toExperience(String jsonExperience) throws JSONException {
         // Eliminazione del campo "type" in modo da non creare problemi con la deserializzazione
-        JSONObject jsonObject = new JSONObject(sb.toString());
+        JSONObject jsonObject = new JSONObject(jsonExperience);
         String type = (String) jsonObject.remove(TYPE);
 
         return new Gson().fromJson(jsonObject.toString(), getClass(type));
