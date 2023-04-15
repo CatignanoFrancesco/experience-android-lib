@@ -1,5 +1,7 @@
 package it.uniba.eculturetool.experience_lib;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,13 +10,14 @@ import java.util.Set;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 
 public class ExperienceDataHolder {
+    private static final String TAG = ExperienceDataHolder.class.getSimpleName();
     private static ExperienceDataHolder experienceDataHolder;
 
-    private final Map<Object, Set<Experience>> operaExperiences = new HashMap<>();
+    private final Map<String, Set<Experience>> operaExperiences = new HashMap<>();
 
     private ExperienceDataHolder() {}
 
-    public void addExperienceToOpera(Object operaId, Experience experience) {
+    public void addExperienceToOpera(String operaId, Experience experience) {
         Set<Experience> experiences;
 
         if(operaExperiences.containsKey(operaId)) {
@@ -35,11 +38,11 @@ public class ExperienceDataHolder {
         }
     }
 
-    public Set<Experience> getExperienceByOperaId(Object operaId) {
+    public Set<Experience> getExperienceByOperaId(String operaId) {
         return operaExperiences.get(operaId);
     }
 
-    public void deleteExperience(Object operaId, Experience experience) {
+    public void deleteExperience(String operaId, Experience experience) {
         if(operaExperiences.containsKey(operaId)) {
             operaExperiences.get(operaId).remove(experience);
         }
