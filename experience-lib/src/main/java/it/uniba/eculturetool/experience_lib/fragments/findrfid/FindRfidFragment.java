@@ -42,28 +42,22 @@ public class FindRfidFragment extends Fragment {
 
     private String operaId;
     private String experienceId;
-    private List<LanguageTag> languages;
-    private LanguageTagViewData languageTagViewData;
-    private EditingTagViewHelper editingTagViewHelper;
     private FindRfidViewModel viewModel;
     private ExperienceViewModel experienceViewModel;
     private final ExperienceDataHolder dataHolder = ExperienceDataHolder.getInstance();
 
     private EditText messageEditText;
-    private ImageButton translateButton;
-    private ChipGroup chipGroup;
     private EditText rfidEditText;
     private Button saveButton;
 
     public FindRfidFragment() {}
 
-    public static FindRfidFragment newInstance(List<LanguageTag> languages, String operaId, String experienceId) {
+    public static FindRfidFragment newInstance(String operaId, String experienceId) {
         FindRfidFragment fragment = new FindRfidFragment();
 
         Bundle args = new Bundle();
         args.putString(ExperienceEditorFragment.KEY_OPERA_ID, operaId);
         args.putString(ExperienceEditorFragment.KEY_EXPERIENCE_ID, experienceId);
-        args.putSerializable(ExperienceEditorFragment.KEY_LANGUAGES, (Serializable) languages);
 
         fragment.setArguments(args);
         return fragment;
@@ -76,7 +70,6 @@ public class FindRfidFragment extends Fragment {
         // Dati dal bundle
         operaId = getArguments().getString(ExperienceEditorFragment.KEY_OPERA_ID);
         experienceId = getArguments().getString(ExperienceEditorFragment.KEY_EXPERIENCE_ID);
-        languages = (List) getArguments().getSerializable(ExperienceEditorFragment.KEY_LANGUAGES);
     }
 
     @Override
@@ -90,8 +83,6 @@ public class FindRfidFragment extends Fragment {
 
         // Ui
         messageEditText = view.findViewById(ui.findRfidFragmentUi.messageEditText);
-        translateButton = view.findViewById(ui.findRfidFragmentUi.translateImageButton);
-        chipGroup = view.findViewById(ui.findRfidFragmentUi.languageChipGroup);
         rfidEditText = view.findViewById(ui.findRfidFragmentUi.rfidCodeEditText);
         saveButton = view.findViewById(ui.findRfidFragmentUi.saveButton);
 
@@ -110,50 +101,15 @@ public class FindRfidFragment extends Fragment {
         }
         experienceViewModel.setExperience(viewModel.getFindRfid().getValue());
 
-        // Chip
-        languageTagViewData = new LanguageTagViewData(Locale.getDefault().getLanguage().toUpperCase());
-        editingTagViewHelper = new EditingTagViewHelper(requireContext(), languageTagViewData, messageEditText, translateButton, chipGroup);
-        if(!viewModel.getFindRfid().getValue().getMessages().isEmpty()) languageTagViewData.setDescriptions(viewModel.getFindRfid().getValue().getMessages());
-        for(LanguageTag languageTag : languages) languageTagViewData.addTag(languageTag);
-        editingTagViewHelper.setDescriptionEditTextBehavior();
-        viewModel.getFindRfid().getValue().setMessages(languageTagViewData.getDescriptions());
-        editingTagViewHelper.setSimpleChipGroupBehaviorForLanguages();
+        if(!viewModel.getFindRfid().getValue().getMessage().isEmpty())
+            messageEditText.setText(viewModel.getFindRfid().getValue().getMessage());
 
-        translation();
         setRfidEditText();
 
         saveButton.setOnClickListener(v -> {
             if(validate()) {
                 dataHolder.addExperienceToOpera(operaId, viewModel.getFindRfid().getValue());
                 requireActivity().finish();
-            }
-        });
-    }
-
-    private void translation() {
-        // Generazione della traduzione
-        Context context = requireContext();
-        TextMaker textMaker = TextMaker.getInstance(context.getString(R.string.deepl_auth_key));
-
-        translateButton.setOnClickListener(view -> {
-            if (!ConnectivityUtils.isNetworkAvailable(context)) {
-                Toast.makeText(context, context.getString(R.string.msg_internet_non_disponibile), Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // Se c'è la connessione ad internet, si può effettuare la traduzione
-            for (LanguageTag languageTag : languageTagViewData.getTargetLanguages()) {
-                textMaker.generateText(
-                        messageEditText.getText().toString(),
-                        languageTag,
-                        bundle -> {
-                            translateButton.setVisibility(View.GONE);
-                            viewModel.getFindRfid().getValue().getMessages().put(languageTag.getLanguage(), bundle.getString(languageTag.getLanguage()));
-                            languageTagViewData.setDescriptions(viewModel.getFindRfid().getValue().getMessages());
-                            Toast.makeText(context, context.getString(it.uniba.eculturetool.tag_lib.R.string.successo_traduzione) + languageTag.getTitle(), Toast.LENGTH_LONG).show();
-                        },
-                        tag -> Toast.makeText(context, context.getString(it.uniba.eculturetool.tag_lib.R.string.errore_traduzione) + tag.getTitle(), Toast.LENGTH_LONG).show()
-                );
             }
         });
     }
@@ -169,7 +125,7 @@ public class FindRfidFragment extends Fragment {
     private boolean validate() {
         FindRFID fr = viewModel.getFindRfid().getValue();
 
-        if(fr.getMessages().size() < languages.size()) {
+        if(messageEditText.getText().toString().isEmpty()) {
             messageEditText.setError(getString(R.string.message_missing));
             messageEditText.requestFocus();
             return false;

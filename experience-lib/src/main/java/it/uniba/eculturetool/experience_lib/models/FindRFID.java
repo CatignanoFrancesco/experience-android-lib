@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class FindRFID extends Experience {
     private UUID rfidId;
-    private Map<String, String> messages = new HashMap<>();
+    private String message;
 
     public FindRFID(String id, Difficulty difficulty, int points) {
         super(id, difficulty, points);
@@ -24,11 +24,11 @@ public class FindRFID extends Experience {
         this.rfidId = rfidId;
     }
 
-    public Map<String, String> getMessages() {
-        return messages;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessages(Map<String, String> messages) {
-        this.messages = messages;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
