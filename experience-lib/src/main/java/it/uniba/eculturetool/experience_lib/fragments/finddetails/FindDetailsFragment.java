@@ -69,12 +69,9 @@ public class FindDetailsFragment extends Fragment {
 
     private String operaId;
     private String experienceId;
-    private List<LanguageTag> languages;
 
     private final FindDetailsUI ui = FindDetailsUI.getInstance();
     private EditText messageEditText;
-    private ImageButton translateButton;
-    private ChipGroup languageChipGroup;
     private ImageView imageView;
     private Bitmap bitmap;
     private Button addImageButton;
@@ -83,18 +80,15 @@ public class FindDetailsFragment extends Fragment {
     private final ExperienceDataHolder experienceDataHolder = ExperienceDataHolder.getInstance();
     private FindDetailsViewModel viewModel;
     private ExperienceViewModel experienceViewModel;
-    private LanguageTagViewData languageTagViewData;
-    private EditingTagViewHelper editingTagViewHelper;
     private ActivityResultLauncher<Intent> pickPhoto;
 
     public FindDetailsFragment() {}
 
-    public static FindDetailsFragment newInstance(String operaId, String experienceId, List<LanguageTag> languages) {
+    public static FindDetailsFragment newInstance(String operaId, String experienceId) {
         FindDetailsFragment fragment = new FindDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ExperienceEditorFragment.KEY_OPERA_ID, operaId);
         args.putString(ExperienceEditorFragment.KEY_EXPERIENCE_ID, experienceId);
-        args.putSerializable(ExperienceEditorFragment.KEY_LANGUAGES, (Serializable) languages);
         fragment.setArguments(args);
         return fragment;
     }
@@ -119,7 +113,6 @@ public class FindDetailsFragment extends Fragment {
 
         operaId = getArguments().getString(ExperienceEditorFragment.KEY_OPERA_ID);
         experienceId = getArguments().getString(ExperienceEditorFragment.KEY_EXPERIENCE_ID);
-        languages = (List) getArguments().getSerializable(ExperienceEditorFragment.KEY_LANGUAGES);
 
         viewModel = new ViewModelProvider(requireActivity()).get(FindDetailsViewModel.class);
         experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
@@ -135,8 +128,6 @@ public class FindDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         messageEditText = view.findViewById(ui.findDetailsFragmentUI.messageEditText);
-        translateButton = view.findViewById(ui.findDetailsFragmentUI.translateImageButton);
-        languageChipGroup = view.findViewById(ui.findDetailsFragmentUI.languageChipGroup);
         imageView = view.findViewById(ui.findDetailsFragmentUI.detailsImageView);
         addImageButton = view.findViewById(ui.findDetailsFragmentUI.addImageButton);
         saveButton = view.findViewById(ui.findDetailsFragmentUI.saveButton);
@@ -151,18 +142,10 @@ public class FindDetailsFragment extends Fragment {
         }
         experienceViewModel.setExperience(viewModel.getFindDetails().getValue());
 
-        // Comportamento dei chip
-        languageTagViewData = new LanguageTagViewData(Locale.getDefault().getLanguage().toUpperCase());
-        editingTagViewHelper = new EditingTagViewHelper(requireContext(), languageTagViewData, messageEditText, translateButton, languageChipGroup);
-        if(!viewModel.getFindDetails().getValue().getMessages().isEmpty()) languageTagViewData.setDescriptions(viewModel.getFindDetails().getValue().getMessages());
-        for(LanguageTag languageTag : languages) languageTagViewData.addTag(languageTag);
-        editingTagViewHelper.setDescriptionEditTextBehavior();
-        viewModel.getFindDetails().getValue().setMessages(languageTagViewData.getDescriptions());
-        editingTagViewHelper.setSimpleChipGroupBehaviorForLanguages(languages);
+        if(!viewModel.getFindDetails().getValue().getMessage().isEmpty()) messageEditText.setText(viewModel.getFindDetails().getValue().getMessage());
 
         ((OnDataLoadListener) requireActivity()).onDataLoad();
         setImage();
-        translation();
 
         saveButton.setOnClickListener(v -> {
             if(validate()) {
@@ -245,36 +228,8 @@ public class FindDetailsFragment extends Fragment {
         }
     }
 
-    private void translation() {
-        // Generazione della traduzione
-        Context context = requireContext();
-        TextMaker textMaker = TextMaker.getInstance(context.getString(R.string.deepl_auth_key));
-
-        translateButton.setOnClickListener(view -> {
-            if (!ConnectivityUtils.isNetworkAvailable(context)) {
-                Toast.makeText(context, context.getString(R.string.msg_internet_non_disponibile), Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // Se c'è la connessione ad internet, si può effettuare la traduzione
-            for (LanguageTag languageTag : languageTagViewData.getTargetLanguages()) {
-                textMaker.generateText(
-                        messageEditText.getText().toString(),
-                        languageTag,
-                        bundle -> {
-                            translateButton.setVisibility(View.GONE);
-                            viewModel.getFindDetails().getValue().getMessages().put(languageTag.getLanguage(), bundle.getString(languageTag.getLanguage()));
-                            languageTagViewData.setDescriptions(viewModel.getFindDetails().getValue().getMessages());
-                            Toast.makeText(context, context.getString(it.uniba.eculturetool.tag_lib.R.string.successo_traduzione) + languageTag.getTitle(), Toast.LENGTH_LONG).show();
-                        },
-                        tag -> Toast.makeText(context, context.getString(it.uniba.eculturetool.tag_lib.R.string.errore_traduzione) + tag.getTitle(), Toast.LENGTH_LONG).show()
-                );
-            }
-        });
-    }
-
     private boolean validate() {
-        if(viewModel.getFindDetails().getValue().getMessages().size() < languages.size() || languageTagViewData.areDescriptionsEmpty()) {
+        if(messageEditText.getText().toString().isEmpty()) {
             messageEditText.setError(getString(R.string.message_missing));
             messageEditText.requestFocus();
             return false;

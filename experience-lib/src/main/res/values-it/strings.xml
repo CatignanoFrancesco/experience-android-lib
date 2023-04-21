@@ -69,7 +69,7 @@
     <string name="insert_message">Inserisci il messaggio di suggerimento</string>
     <string name="message_tooltip">Il quadro più famoso di Salvador Dalì…</string>
     <string name="insert_rfid_code">Inserisci il codice RFID nel formato UUID</string>
-    <string name="message_missing">Inserisci il messaggio in tutte le lingue</string>
+    <string name="message_missing">Inserisci il messaggio</string>
     <string name="rfid_code_missing">Inserisci il codice RFID</string>
     <string name="rfid_code_wrong_format">Inserisci un codice RFID corretto</string>
     <string name="pattern">Memorizza il pattern</string>

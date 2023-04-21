@@ -9,7 +9,7 @@ import java.util.Map;
 public class FindDetails extends Experience {
     private transient Bitmap image;
     private List<Coordinate> coordinates;
-    private Map<String, String> messages = new HashMap<>();
+    private String message;
 
     public FindDetails(String id, Difficulty difficulty, int points) {
         super(id, difficulty, points);
@@ -35,11 +35,11 @@ public class FindDetails extends Experience {
         this.coordinates = coordinates;
     }
 
-    public Map<String, String> getMessages() {
-        return messages;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessages(Map<String, String> messages) {
-        this.messages = messages;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

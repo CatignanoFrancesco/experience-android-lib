@@ -73,7 +73,7 @@
     <string name="insert_message">Insert your hint message</string>
     <string name="message_tooltip">The most famous painting of Salvador Dalì…</string>
     <string name="insert_rfid_code">Insert RFID code in UUID format</string>
-    <string name="message_missing">Insert the message in all languages</string>
+    <string name="message_missing">Insert the message</string>
     <string name="rfid_code_missing">Insert RFID code</string>
     <string name="rfid_code_wrong_format">Insert a correct RFID code</string>
     <string name="pattern">Memorize the pattern</string>
