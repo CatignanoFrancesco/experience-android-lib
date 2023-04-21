@@ -26,14 +26,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     private List<Answer> answers;
     private Context context;
     private QuestionEditorFragment questionEditorFragment;
-    private List<LanguageTag> languageTags;
     private OnClickDeleteListener<Answer> onClickDeleteListener;
 
-    public AnswerAdapter(Context context, List<Answer> answers, QuestionEditorFragment questionEditorFragment, List<LanguageTag> languageTags, OnClickDeleteListener<Answer> onClickDeleteListener) {
+    public AnswerAdapter(Context context, List<Answer> answers, QuestionEditorFragment questionEditorFragment, OnClickDeleteListener<Answer> onClickDeleteListener) {
         this.context = context;
         this.answers = answers;
         this.onClickDeleteListener = onClickDeleteListener;
-        this.languageTags = languageTags;
         this.questionEditorFragment = questionEditorFragment;
     }
 
@@ -51,16 +49,16 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         if(answers == null || answers.isEmpty()) return;
 
         Answer answer = answers.get(position);
-        holder.answerTextView.setText(answer.getDefaultText());
+        holder.answerTextView.setText(answer.getAnswerText());
 
         if(answer.isCorrect()) holder.answerTextView.setTextColor(ColorStateList.valueOf(Color.parseColor("#228B22")));
-        holder.layout.setOnClickListener(v -> new AddAnswerAlertDialog(context, questionEditorFragment, languageTags, answer).show());
+        holder.layout.setOnClickListener(v -> new AddAnswerAlertDialog(context, questionEditorFragment, answer).show());
 
         holder.layout.setOnCreateContextMenuListener(new ExperienceContextMenuListener(
                 context,
                 position,
                 answer,
-                unused -> new AddAnswerAlertDialog(context, questionEditorFragment, languageTags, answer).show(),
+                unused -> new AddAnswerAlertDialog(context, questionEditorFragment, answer).show(),
                 () -> {
                     answers.remove(answer);
                     onClickDeleteListener.onClickDelete(answer);

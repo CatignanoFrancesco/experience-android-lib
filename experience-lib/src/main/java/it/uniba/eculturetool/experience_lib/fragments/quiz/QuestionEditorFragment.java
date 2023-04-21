@@ -197,7 +197,6 @@ public class QuestionEditorFragment extends Fragment {
                 requireContext(),
                 new ArrayList<>(quizViewModel.getAnswers()),
                 this,
-                languageTags,
                 answer -> {
                     quizViewModel.getActiveQuestion().getAnswers().remove(answer);
                     ((OnClickDeleteListener<Object>) requireActivity()).onClickDelete(answer);
@@ -206,7 +205,7 @@ public class QuestionEditorFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        addAnswerButton.setOnClickListener(v -> new AddAnswerAlertDialog(requireContext(), this, languageTags).show());
+        addAnswerButton.setOnClickListener(v -> new AddAnswerAlertDialog(requireContext(), this).show());
     }
 
     /**

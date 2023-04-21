@@ -7,18 +7,18 @@ import java.util.UUID;
 
 public class Answer {
     private String id;
-    private Map<String, String> answerTexts;
+    private String answerText;
     private boolean isCorrect;
 
-    public Answer(String id, Map<String, String> answerTexts, boolean isCorrect) {
+    public Answer(String id, String answerText, boolean isCorrect) {
         this.id = id;
-        this.answerTexts = answerTexts;
+        this.answerText = answerText;
         this.isCorrect = isCorrect;
     }
 
-    public Answer(Map<String, String> answerTexts, boolean isCorrect) {
+    public Answer(String answerText, boolean isCorrect) {
         this.id = UUID.randomUUID().toString();
-        this.answerTexts = answerTexts;
+        this.answerText = answerText;
         this.isCorrect = isCorrect;
     }
 
@@ -30,20 +30,12 @@ public class Answer {
         return id;
     }
 
-    public Map<String, String> getAnswerTexts() {
-        return answerTexts;
+    public String getAnswerText() {
+        return answerText;
     }
 
-    public String getDefaultText() {
-        if(answerTexts == null || answerTexts.isEmpty()) return "";
-
-        String defaultLang = Locale.getDefault().getLanguage().toUpperCase();
-        if(answerTexts.containsKey(defaultLang)) return answerTexts.get(defaultLang);
-        else return answerTexts.entrySet().iterator().next().getValue();
-    }
-
-    public void setAnswerTexts(Map<String, String> answerTexts) {
-        this.answerTexts = answerTexts;
+    public void setAnswerText(String answerText) {
+        this.answerText = answerText;
     }
 
     public boolean isCorrect() {
