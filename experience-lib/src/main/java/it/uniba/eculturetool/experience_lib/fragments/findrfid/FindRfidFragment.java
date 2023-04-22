@@ -13,14 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.google.android.material.chip.ChipGroup;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
@@ -31,11 +24,6 @@ import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
 import it.uniba.eculturetool.experience_lib.ui.FindRfidUI;
-import it.uniba.eculturetool.experience_lib.utils.ConnectivityUtils;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
-import it.uniba.eculturetool.tag_lib.textmaker.facade.TextMaker;
-import it.uniba.eculturetool.tag_lib.viewhelpers.EditingTagViewHelper;
-import it.uniba.eculturetool.tag_lib.viewhelpers.LanguageTagViewData;
 
 public class FindRfidFragment extends Fragment {
     private final FindRfidUI ui = FindRfidUI.getInstance();
