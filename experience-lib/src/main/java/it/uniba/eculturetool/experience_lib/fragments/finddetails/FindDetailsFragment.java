@@ -39,14 +39,11 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.material.chip.ChipGroup;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
@@ -58,11 +55,6 @@ import it.uniba.eculturetool.experience_lib.models.Coordinate;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
 import it.uniba.eculturetool.experience_lib.ui.FindDetailsUI;
-import it.uniba.eculturetool.experience_lib.utils.ConnectivityUtils;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
-import it.uniba.eculturetool.tag_lib.textmaker.facade.TextMaker;
-import it.uniba.eculturetool.tag_lib.viewhelpers.EditingTagViewHelper;
-import it.uniba.eculturetool.tag_lib.viewhelpers.LanguageTagViewData;
 
 public class FindDetailsFragment extends Fragment {
     private static final int MARGIN = 20;
