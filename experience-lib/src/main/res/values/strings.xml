@@ -37,7 +37,7 @@
     <string name="correct">Correct</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="questions_empty">Insert the question in all languages</string>
+    <string name="questions_empty">Insert the question</string>
     <string name="points_missing">Insert a score</string>
     <string name="answers_missing">Insert at least two answers</string>
     <string name="correct_answer_missing">Insert at least one correct answer</string>

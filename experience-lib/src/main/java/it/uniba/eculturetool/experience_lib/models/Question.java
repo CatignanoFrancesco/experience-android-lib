@@ -12,28 +12,29 @@ import java.util.UUID;
 
 public class Question {
     private String id;
+    private String questionText;
     private Map<String, String> questionTexts;
     private int points;
     private transient Bitmap image;
     private Set<Answer> answers;
     private boolean hasImage = false;
 
-    public Question(String id, Map<String, String> questionTexts, int points, Set<Answer> answers, boolean hasImage, Bitmap image) {
+    public Question(String id, String questionText, int points, Set<Answer> answers, boolean hasImage, Bitmap image) {
         this.id = id;
-        this.questionTexts = questionTexts;
+        this.questionText = questionText;
         this.points = points;
         this.image = image;
         this.answers = answers;
         this.hasImage = true;
     }
 
-    public Question(Map<String, String> questionTexts, int points, Set<Answer> answers, boolean hasImage, Bitmap image) {
-        this(UUID.randomUUID().toString(), questionTexts, points, answers, hasImage, image);
+    public Question(String questionText, int points, Set<Answer> answers, boolean hasImage, Bitmap image) {
+        this(UUID.randomUUID().toString(), questionText, points, answers, hasImage, image);
     }
 
     public Question() {
         this(
-                new HashMap<>(),
+                "",
                 0,
                 new HashSet<>(),
                 false,
@@ -49,14 +50,15 @@ public class Question {
         this.points = points;
     }
 
-    public Map<String, String> getQuestionTexts() {
-        return questionTexts;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public void setQuestionTexts(Map<String, String> questionTexts) {
-        this.questionTexts = questionTexts;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
+    @Deprecated
     public String getDefaultQuestionText() {
         if(questionTexts == null || questionTexts.isEmpty()) return "";
 

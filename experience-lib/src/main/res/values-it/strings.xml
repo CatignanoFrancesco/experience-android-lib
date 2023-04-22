@@ -33,7 +33,7 @@
     <string name="correct">Corretta</string>
     <string name="save">Salva</string>
     <string name="cancel">Annulla</string>
-    <string name="questions_empty">Inserisci la domanda in tutte le lingue</string>
+    <string name="questions_empty">Inserisci la domanda</string>
     <string name="points_missing">Inserisci un punteggio</string>
     <string name="answers_missing">Inserisci almeno due risposte</string>
     <string name="correct_answer_missing">Inserisci almeno una risposta corretta</string>

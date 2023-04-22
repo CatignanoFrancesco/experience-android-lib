@@ -54,9 +54,7 @@ public class QuestionEditorFragment extends Fragment {
 
     private Button addAnswerButton;
     private TextInputEditText pointsText;
-    private ChipGroup chipGroup;
     private TextInputEditText questionsText;
-    private ImageButton translateButton;
     private Button addImageButton;
     private ImageView image;
     private RecyclerView recyclerView;
@@ -64,9 +62,6 @@ public class QuestionEditorFragment extends Fragment {
     private Button saveButton;
 
     private QuizViewModel quizViewModel;
-    private List<LanguageTag> languageTags;
-    private LanguageTagViewData languageTagViewData;
-    private EditingTagViewHelper editingTagViewHelper;
     private ActivityResultLauncher<Intent> pickPhoto;
     private int previousPoints = 0; // In caso di modifica questo valore servirà per calcolare la differenza di punteggio con il nuovo punteggio
 
@@ -101,35 +96,22 @@ public class QuestionEditorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        languageTags = quizViewModel.getLanguageTags();
 
         addAnswerButton = view.findViewById(ui.questionEditorFragmentUI.addAnswerButtonId);
         recyclerView = view.findViewById(ui.questionEditorFragmentUI.answersRecyclerViewId);
         pointsText = view.findViewById(ui.questionEditorFragmentUI.pointsInputTextId);
-        chipGroup = view.findViewById(ui.questionEditorFragmentUI.languagesChipGroupId);
         questionsText = view.findViewById(ui.questionEditorFragmentUI.questionInputTextId);
-        translateButton = view.findViewById(ui.questionEditorFragmentUI.questionTranslateImageButtonId);
         addImageButton = view.findViewById(ui.questionEditorFragmentUI.addQuestionImageButtonId);
         image = view.findViewById(ui.questionEditorFragmentUI.questionImageViewId);
         saveButton = view.findViewById(ui.questionEditorFragmentUI.saveButtonId);
-
-        // Comportamento dei chip
-        languageTagViewData = new LanguageTagViewData(Locale.getDefault().getLanguage().toUpperCase());
-        editingTagViewHelper = new EditingTagViewHelper(requireContext(), languageTagViewData, questionsText, translateButton, chipGroup);
-        if(!quizViewModel.getActiveQuestion().getQuestionTexts().isEmpty()) languageTagViewData.setDescriptions(quizViewModel.getActiveQuestion().getQuestionTexts());
-        editingTagViewHelper.setDescriptionEditTextBehavior();
-        quizViewModel.getActiveQuestion().setQuestionTexts(languageTagViewData.getDescriptions());
-        editingTagViewHelper.setSimpleChipGroupBehaviorForLanguages(languageTags);
-        for(LanguageTag languageTag : languageTags) languageTagViewData.addTag(languageTag);
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        translation();
-
         ((OnDataLoadListener) requireActivity()).onDataLoad();
+        if(!quizViewModel.getActiveQuestion().getQuestionText().isEmpty()) questionsText.setText(quizViewModel.getActiveQuestion().getQuestionText());
         setRecyclerView();
         setPointsText();
         setImage();
@@ -209,37 +191,6 @@ public class QuestionEditorFragment extends Fragment {
     }
 
     /**
-     * Effettua la traduzione
-     */
-    private void translation() {
-        // Generazione della traduzione
-        Context context = requireContext();
-        TextMaker textMaker = TextMaker.getInstance(context.getString(R.string.deepl_auth_key));
-
-        translateButton.setOnClickListener(view -> {
-            if (!ConnectivityUtils.isNetworkAvailable(context)) {
-                Toast.makeText(context, context.getString(R.string.msg_internet_non_disponibile), Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // Se c'è la connessione ad internet, si può effettuare la traduzione
-            for (LanguageTag languageTag : languageTagViewData.getTargetLanguages()) {
-                textMaker.generateText(
-                        questionsText.getText().toString(),
-                        languageTag,
-                        bundle -> {
-                            translateButton.setVisibility(View.GONE);
-                            quizViewModel.getActiveQuestion().getQuestionTexts().put(languageTag.getLanguage(), bundle.getString(languageTag.getLanguage()));
-                            languageTagViewData.setDescriptions(quizViewModel.getActiveQuestion().getQuestionTexts());
-                            Toast.makeText(context, context.getString(it.uniba.eculturetool.tag_lib.R.string.successo_traduzione) + languageTag.getTitle(), Toast.LENGTH_LONG).show();
-                        },
-                        tag -> Toast.makeText(context, context.getString(it.uniba.eculturetool.tag_lib.R.string.errore_traduzione) + tag.getTitle(), Toast.LENGTH_LONG).show()
-                );
-            }
-        });
-    }
-
-    /**
      * Controlla che tutti i dati siano stati inseriti correttamente
      * @return true se i dati sono inseriti correttamente, false altrimenti
      */
@@ -252,7 +203,7 @@ public class QuestionEditorFragment extends Fragment {
             return false;
         }
 
-        if(question.getQuestionTexts().size() < languageTagViewData.getAddedLanguages().getValue().size()) {
+        if(questionsText.getText().toString().isEmpty()) {
             questionsText.setError(requireContext().getString(R.string.questions_empty));
             questionsText.requestFocus();
             return false;
