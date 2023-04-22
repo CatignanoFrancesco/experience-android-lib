@@ -1,7 +1,6 @@
 package it.uniba.eculturetool.experience_lib.fragments.quiz;
 
 import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_EXPERIENCE_ID;
-import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_LANGUAGES;
 import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_OPERA_ID;
 
 import androidx.annotation.NonNull;
@@ -36,9 +35,8 @@ public class QuizFragment extends Fragment {
 
     public QuizFragment() {}
 
-    public static QuizFragment newInstance(List<LanguageTag> languageTags, String operaId, String quizId) {
+    public static QuizFragment newInstance(String operaId, String quizId) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(KEY_LANGUAGES, (Serializable) languageTags);
         bundle.putString(KEY_OPERA_ID, operaId);
         bundle.putString(KEY_EXPERIENCE_ID, quizId);
 
@@ -76,9 +74,6 @@ public class QuizFragment extends Fragment {
                 }
             }
         }
-
-        List<LanguageTag> languageTags = (List<LanguageTag>) getArguments().getSerializable(KEY_LANGUAGES);
-        quizViewModel.addLanguages(languageTags);
 
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)

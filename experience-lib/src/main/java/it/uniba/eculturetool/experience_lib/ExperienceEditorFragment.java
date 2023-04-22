@@ -25,7 +25,6 @@ import it.uniba.eculturetool.experience_lib.ui.ExperienceUI;
 public class ExperienceEditorFragment extends Fragment {
     public static final String KEY_EXPERIENCE_ID = "EXP_ID";
     public static final String KEY_OPERA_ID = "OPERA_ID";
-    public static final String KEY_LANGUAGES = "LANGUAGES";
 
     protected final ExperienceUI ui = ExperienceUI.getInstance();
 
