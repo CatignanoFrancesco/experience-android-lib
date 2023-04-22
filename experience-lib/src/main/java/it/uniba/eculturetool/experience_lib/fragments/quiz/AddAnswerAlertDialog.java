@@ -28,10 +28,8 @@ import it.uniba.eculturetool.tag_lib.viewhelpers.LanguageTagViewData;
 public class AddAnswerAlertDialog {
     private Context context;
     private View layout;
-    private ChipGroup chipGroup;
     private EditText answerEditText;
     private CheckBox checkBox;
-    private ImageButton translateButton;
     private QuestionEditorFragment questionEditorFragment;
     private Answer answer;
 
@@ -47,10 +45,8 @@ public class AddAnswerAlertDialog {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         layout = layoutInflater.inflate(R.layout.add_answer_layout, null);
 
-        chipGroup = layout.findViewById(R.id.answer_language_chip_group);
         answerEditText = layout.findViewById(R.id.answer_edit_text);
         checkBox = layout.findViewById(R.id.correct_checkbox);
-        translateButton = layout.findViewById(R.id.answer_translate_button);
 
         loadData();
     }
