@@ -14,7 +14,6 @@ import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
 
 public class AddExperienceAlertDialog {
 
