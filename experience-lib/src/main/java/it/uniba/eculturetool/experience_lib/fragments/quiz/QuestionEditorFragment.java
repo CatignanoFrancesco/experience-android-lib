@@ -134,6 +134,19 @@ public class QuestionEditorFragment extends Fragment {
 
         if(question != null && !question.isEmpty())
             questionsText.setText(question);
+
+        questionsText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                quizViewModel.getActiveQuestion().setQuestionText(editable.toString());
+            }
+        });
     }
 
     /**

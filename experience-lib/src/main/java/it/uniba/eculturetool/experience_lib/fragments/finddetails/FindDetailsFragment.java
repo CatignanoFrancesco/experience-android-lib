@@ -22,6 +22,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -151,6 +153,20 @@ public class FindDetailsFragment extends Fragment {
 
         if(message != null && !message.isEmpty())
             messageEditText.setText(message);
+
+        messageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String text = editable.toString();
+                viewModel.getFindDetails().getValue().setMessage(text);
+            }
+        });
     }
 
     @SuppressLint("ClickableViewAccessibility")
