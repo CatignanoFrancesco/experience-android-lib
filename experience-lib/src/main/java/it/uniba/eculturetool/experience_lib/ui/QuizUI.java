@@ -38,9 +38,7 @@ public class QuizUI {
         public int layout;
         public int pointsInputTextId;
         public int pointsTextViewId;
-        public int languagesChipGroupId;
         public int questionInputTextId;
-        public int questionTranslateImageButtonId;
         public int questionImageViewId;
         public int addQuestionImageButtonId;
         public int addAnswerButtonId;

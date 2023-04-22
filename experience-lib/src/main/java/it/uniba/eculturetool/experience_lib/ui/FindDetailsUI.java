@@ -9,7 +9,6 @@ public class FindDetailsUI {
         public int layout;
         public int experienceFragmentContainerView;
         public int messageEditText;
-        public int languageChipGroup;
         public int translateImageButton;
         public int detailsImageView;
         public int addImageButton;
