@@ -43,11 +43,6 @@ import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
 import it.uniba.eculturetool.experience_lib.models.Question;
 import it.uniba.eculturetool.experience_lib.ui.QuizUI;
-import it.uniba.eculturetool.experience_lib.utils.ConnectivityUtils;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
-import it.uniba.eculturetool.tag_lib.textmaker.facade.TextMaker;
-import it.uniba.eculturetool.tag_lib.viewhelpers.EditingTagViewHelper;
-import it.uniba.eculturetool.tag_lib.viewhelpers.LanguageTagViewData;
 
 public class QuestionEditorFragment extends Fragment {
     private final QuizUI ui = QuizUI.getInstance();

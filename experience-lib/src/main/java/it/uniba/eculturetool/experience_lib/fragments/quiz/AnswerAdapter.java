@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import it.uniba.eculturetool.experience_lib.ExperienceContextMenuListener;
 import it.uniba.eculturetool.experience_lib.listeners.OnClickDeleteListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
 import it.uniba.eculturetool.experience_lib.ui.QuizUI;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
     private final QuizUI ui = QuizUI.getInstance();

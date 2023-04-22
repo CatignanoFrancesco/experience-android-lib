@@ -15,15 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
 import it.uniba.eculturetool.experience_lib.ui.QuizUI;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
 
 public class QuizFragment extends Fragment {
     private final QuizUI ui = QuizUI.getInstance();

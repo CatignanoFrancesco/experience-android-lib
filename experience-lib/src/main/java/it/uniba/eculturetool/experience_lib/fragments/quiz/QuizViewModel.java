@@ -10,10 +10,8 @@ import java.util.Set;
 import it.uniba.eculturetool.experience_lib.models.Answer;
 import it.uniba.eculturetool.experience_lib.models.Question;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
-import it.uniba.eculturetool.tag_lib.tag.model.LanguageTag;
 
 public class QuizViewModel extends ViewModel {
-    private List<LanguageTag> languageTags; // Le lingue usate
 
     private MutableLiveData<Quiz> quiz = new MutableLiveData<>(new Quiz());
 
@@ -27,14 +25,6 @@ public class QuizViewModel extends ViewModel {
     public void setQuiz(Quiz quiz) {
         if(quiz == null) return;
         this.quiz.setValue(quiz);
-    }
-
-    public List<LanguageTag> getLanguageTags() {
-        return languageTags;
-    }
-
-    public void addLanguages(List<LanguageTag> languageTags) {
-        this.languageTags = languageTags;
     }
 
     public void addAnswer(Answer answer) {
