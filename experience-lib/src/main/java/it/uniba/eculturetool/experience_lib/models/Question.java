@@ -13,7 +13,6 @@ import java.util.UUID;
 public class Question {
     private String id;
     private String questionText;
-    private Map<String, String> questionTexts;
     private int points;
     private transient Bitmap image;
     private Set<Answer> answers;
@@ -56,14 +55,6 @@ public class Question {
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
-    }
-
-    @Deprecated
-    public String getDefaultQuestionText() {
-        if(questionTexts == null || questionTexts.isEmpty()) return "";
-
-        if(questionTexts.containsKey(Locale.getDefault().getLanguage().toUpperCase())) return questionTexts.get(Locale.getDefault().getLanguage().toUpperCase());
-        else return questionTexts.entrySet().iterator().next().getValue();
     }
 
     public void setId(String id) {

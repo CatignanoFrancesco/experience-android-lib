@@ -51,7 +51,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         Question question = questions.get(position);
-        holder.questionText.setText(question.getDefaultQuestionText());
+        holder.questionText.setText(question.getQuestionText());
         holder.constraintLayout.setOnClickListener(v -> quizFragment.editQuestion(question));
         holder.question = question;
 
