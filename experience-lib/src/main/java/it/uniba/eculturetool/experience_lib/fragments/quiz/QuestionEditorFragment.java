@@ -106,7 +106,8 @@ public class QuestionEditorFragment extends Fragment {
         super.onStart();
 
         ((OnDataLoadListener) requireActivity()).onDataLoad();
-        if(!quizViewModel.getActiveQuestion().getQuestionText().isEmpty()) questionsText.setText(quizViewModel.getActiveQuestion().getQuestionText());
+
+        setQuestionsText();
         setRecyclerView();
         setPointsText();
         setImage();
@@ -126,6 +127,13 @@ public class QuestionEditorFragment extends Fragment {
         quizViewModel.addAnswer(answer);
         adapter.addAnswer(answer);
         adapter.notifyDataSetChanged();
+    }
+
+    private void setQuestionsText() {
+        String question = quizViewModel.getActiveQuestion().getQuestionText();
+
+        if(question != null && !question.isEmpty())
+            questionsText.setText(question);
     }
 
     /**

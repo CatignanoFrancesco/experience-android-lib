@@ -134,9 +134,8 @@ public class FindDetailsFragment extends Fragment {
         }
         experienceViewModel.setExperience(viewModel.getFindDetails().getValue());
 
-        if(!viewModel.getFindDetails().getValue().getMessage().isEmpty()) messageEditText.setText(viewModel.getFindDetails().getValue().getMessage());
-
         ((OnDataLoadListener) requireActivity()).onDataLoad();
+        setMessageEditText();
         setImage();
 
         saveButton.setOnClickListener(v -> {
@@ -145,6 +144,13 @@ public class FindDetailsFragment extends Fragment {
                 requireActivity().finish();
             }
         });
+    }
+
+    private void setMessageEditText() {
+        String message = viewModel.getFindDetails().getValue().getMessage();
+
+        if(message != null && !message.isEmpty())
+            messageEditText.setText(message);
     }
 
     @SuppressLint("ClickableViewAccessibility")

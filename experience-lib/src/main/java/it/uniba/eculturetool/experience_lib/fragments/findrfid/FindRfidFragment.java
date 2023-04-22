@@ -89,9 +89,7 @@ public class FindRfidFragment extends Fragment {
         }
         experienceViewModel.setExperience(viewModel.getFindRfid().getValue());
 
-        if(!viewModel.getFindRfid().getValue().getMessage().isEmpty())
-            messageEditText.setText(viewModel.getFindRfid().getValue().getMessage());
-
+        setMessageEditText();
         setRfidEditText();
 
         saveButton.setOnClickListener(v -> {
@@ -100,6 +98,13 @@ public class FindRfidFragment extends Fragment {
                 requireActivity().finish();
             }
         });
+    }
+
+    private void setMessageEditText() {
+        String message = viewModel.getFindRfid().getValue().getMessage();
+
+        if(message != null && !message.isEmpty())
+            messageEditText.setText(message);
     }
 
     private void setRfidEditText() {
