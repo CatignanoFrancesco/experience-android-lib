@@ -1,5 +1,6 @@
 package it.uniba.eculturetool.experience_lib.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Set;
  */
 public class SingleQuestion extends TimedExperience {
     private String question;
-    private Set<Answer> answers;
+    private Set<Answer> answers = new HashSet<>();
 
     public SingleQuestion(String id, Difficulty difficulty, int points, int minutes, int seconds, String question, Set<Answer> answers) {
         super(id, difficulty, points, minutes, seconds);
