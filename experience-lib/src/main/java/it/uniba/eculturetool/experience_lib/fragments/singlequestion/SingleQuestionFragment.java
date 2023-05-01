@@ -19,7 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
+import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.QuizEditorFragment;
+import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.ui.SingleQuestionUI;
 
 public class SingleQuestionFragment extends Fragment {
@@ -28,6 +30,8 @@ public class SingleQuestionFragment extends Fragment {
     private String operaId;
     private String singleQuestionId;
     private final ExperienceDataHolder experienceDataHolder = ExperienceDataHolder.getInstance();
+    private SingleQuestionViewModel viewModel;
+    private ExperienceViewModel experienceViewModel;
 
     private EditText questionEditText;
     private RecyclerView answersRecyclerView;
@@ -51,6 +55,9 @@ public class SingleQuestionFragment extends Fragment {
             operaId = getArguments().getString(KEY_OPERA_ID);
             singleQuestionId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
+
+        viewModel = new ViewModelProvider(requireActivity()).get(SingleQuestionViewModel.class);
+        experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
     }
 
     @Override
@@ -66,5 +73,12 @@ public class SingleQuestionFragment extends Fragment {
         answersRecyclerView = view.findViewById(ui.singleQuestionEditorUi.answersRecyclerViewId);
         addAnswerButton = view.findViewById(ui.singleQuestionEditorUi.addAnswerButtonId);
         saveButton = view.findViewById(ui.singleQuestionEditorUi.saveButtonId);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        ((OnDataLoadListener) requireActivity()).onDataLoad();
     }
 }
