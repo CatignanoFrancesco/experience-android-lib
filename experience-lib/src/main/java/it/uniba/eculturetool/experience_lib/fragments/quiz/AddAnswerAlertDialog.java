@@ -17,17 +17,17 @@ public class AddAnswerAlertDialog {
     private View layout;
     private EditText answerEditText;
     private CheckBox checkBox;
-    private QuestionEditorFragment questionEditorFragment;
+    private AnswerManager answerManager;
     private Answer answer;
 
-    public AddAnswerAlertDialog(Context context, QuestionEditorFragment questionEditorFragment) {
-        this(context, questionEditorFragment, null);
+    public AddAnswerAlertDialog(Context context, AnswerManager answerManager) {
+        this(context, answerManager, null);
     }
 
-    public AddAnswerAlertDialog(Context context, QuestionEditorFragment questionEditorFragment, Answer answer) {
+    public AddAnswerAlertDialog(Context context, AnswerManager answerManager, Answer answer) {
         this.answer = answer;
         this.context = context;
-        this.questionEditorFragment = questionEditorFragment;
+        this.answerManager = answerManager;
 
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         layout = layoutInflater.inflate(R.layout.add_answer_layout, null);
@@ -54,7 +54,7 @@ public class AddAnswerAlertDialog {
     private void onClickListener(DialogInterface dialogInterface, int i) {
         if(!validate()) return;
 
-        questionEditorFragment.onAnswerCreated(answer != null ? answer : new Answer(answerEditText.getText().toString(), checkBox.isChecked()));
+        answerManager.onAnswerCreated(answer != null ? answer : new Answer(answerEditText.getText().toString(), checkBox.isChecked()));
     }
 
     private boolean validate() {

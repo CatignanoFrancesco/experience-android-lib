@@ -44,7 +44,7 @@ import it.uniba.eculturetool.experience_lib.models.Answer;
 import it.uniba.eculturetool.experience_lib.models.Question;
 import it.uniba.eculturetool.experience_lib.ui.QuizUI;
 
-public class QuestionEditorFragment extends Fragment {
+public class QuestionEditorFragment extends Fragment implements AnswerManager {
     private final QuizUI ui = QuizUI.getInstance();
 
     private Button addAnswerButton;
@@ -123,6 +123,7 @@ public class QuestionEditorFragment extends Fragment {
      * Comportamento da avere quando si aggiunge una risposta
      * @param answer La risposta
      */
+    @Override
     public void onAnswerCreated(Answer answer) {
         quizViewModel.addAnswer(answer);
         adapter.addAnswer(answer);

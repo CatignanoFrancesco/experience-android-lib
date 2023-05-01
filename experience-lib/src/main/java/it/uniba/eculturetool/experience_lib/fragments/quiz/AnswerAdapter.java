@@ -23,14 +23,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     private List<Answer> answers;
     private Context context;
-    private QuestionEditorFragment questionEditorFragment;
+    private AnswerManager answerManager;
     private OnClickDeleteListener<Answer> onClickDeleteListener;
 
-    public AnswerAdapter(Context context, List<Answer> answers, QuestionEditorFragment questionEditorFragment, OnClickDeleteListener<Answer> onClickDeleteListener) {
+    public AnswerAdapter(Context context, List<Answer> answers, AnswerManager answerManager, OnClickDeleteListener<Answer> onClickDeleteListener) {
         this.context = context;
         this.answers = answers;
         this.onClickDeleteListener = onClickDeleteListener;
-        this.questionEditorFragment = questionEditorFragment;
+        this.answerManager = answerManager;
     }
 
     @NonNull
@@ -50,13 +50,13 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
         holder.answerTextView.setText(answer.getAnswerText());
 
         if(answer.isCorrect()) holder.answerTextView.setTextColor(ColorStateList.valueOf(Color.parseColor("#228B22")));
-        holder.layout.setOnClickListener(v -> new AddAnswerAlertDialog(context, questionEditorFragment, answer).show());
+        holder.layout.setOnClickListener(v -> new AddAnswerAlertDialog(context, answerManager, answer).show());
 
         holder.layout.setOnCreateContextMenuListener(new ExperienceContextMenuListener(
                 context,
                 position,
                 answer,
-                unused -> new AddAnswerAlertDialog(context, questionEditorFragment, answer).show(),
+                unused -> new AddAnswerAlertDialog(context, answerManager, answer).show(),
                 () -> {
                     answers.remove(answer);
                     onClickDeleteListener.onClickDelete(answer);
