@@ -79,6 +79,7 @@
     <string name="tap_to_details">Clicca sull\'immagine per selezionare i dettagli</string>
     <string name="details_message_hint">Trova le colonne gotiche</string>
     <string name="details_missing">Seleziona i dettagli da trovare</string>
+    <string name="single_question">Domanda singola</string>
 
     <!-- Tag -->
     <string name="msg_internet_non_disponibile">Internet non è disponibile</string>
