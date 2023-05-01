@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
@@ -27,6 +28,7 @@ import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.TimedExperienceEditorFragment;
+import it.uniba.eculturetool.experience_lib.fragments.quiz.AddAnswerAlertDialog;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerAdapter;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerManager;
 import it.uniba.eculturetool.experience_lib.listeners.OnClickDeleteListener;
@@ -139,6 +141,10 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
                     ((OnClickDeleteListener<Object>) requireActivity()).onClickDelete(answer);
                 }
         );
+        answersRecyclerView.setAdapter(adapter);
+        answersRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        addAnswerButton.setOnClickListener(v -> new AddAnswerAlertDialog(requireContext(), this).show());
     }
 
     @Override

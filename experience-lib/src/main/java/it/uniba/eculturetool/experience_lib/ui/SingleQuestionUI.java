@@ -4,7 +4,6 @@ public class SingleQuestionUI {
     private static SingleQuestionUI instance;
 
     public final SingleQuestionEditorUI singleQuestionEditorUi = new SingleQuestionEditorUI();
-    public final QuizUI.AnswerAdapterUI answerAdapterUi = new QuizUI.AnswerAdapterUI();
 
     // Question editor
     public static class SingleQuestionEditorUI {

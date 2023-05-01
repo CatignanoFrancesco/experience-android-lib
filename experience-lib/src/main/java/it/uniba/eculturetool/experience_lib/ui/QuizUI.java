@@ -7,7 +7,6 @@ public class QuizUI {
     public final QuestionEditorFragmentUI questionEditorFragmentUI = new QuestionEditorFragmentUI();
     public final QuizEditorFragmentUI quizEditorFragmentUI = new QuizEditorFragmentUI();
     public final QuestionAdapterUI questionAdapterUI = new QuestionAdapterUI();
-    public final AnswerAdapterUI answerAdapterUI = new AnswerAdapterUI();
 
     // QuizFragment
     public static class QuizFragmentUI {
@@ -44,13 +43,6 @@ public class QuizUI {
         public int addAnswerButtonId;
         public int answersRecyclerViewId;
         public int saveButtonId;
-    }
-
-    // AnswerAdapter
-    public static class AnswerAdapterUI {
-        public int layout;
-        public int layoutId;
-        public int answerTextViewId;
     }
 
 

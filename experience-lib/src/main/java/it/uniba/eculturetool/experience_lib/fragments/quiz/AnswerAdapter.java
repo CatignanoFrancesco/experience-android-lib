@@ -16,10 +16,10 @@ import java.util.List;
 import it.uniba.eculturetool.experience_lib.ExperienceContextMenuListener;
 import it.uniba.eculturetool.experience_lib.listeners.OnClickDeleteListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
-import it.uniba.eculturetool.experience_lib.ui.QuizUI;
+import it.uniba.eculturetool.experience_lib.ui.AnswerUI;
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder> {
-    private final QuizUI ui = QuizUI.getInstance();
+    private final AnswerUI ui = AnswerUI.getInstance();
 
     private List<Answer> answers;
     private Context context;
