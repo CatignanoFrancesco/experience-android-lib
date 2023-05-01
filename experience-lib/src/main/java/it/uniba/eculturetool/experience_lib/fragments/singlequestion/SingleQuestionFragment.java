@@ -70,6 +70,8 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
 
         viewModel = new ViewModelProvider(requireActivity()).get(SingleQuestionViewModel.class);
         experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
+
+        experienceViewModel.setExperience(viewModel.getSingleQuestion());
     }
 
     @Override
