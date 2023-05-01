@@ -85,7 +85,9 @@ public class ExperienceEditorFragment extends Fragment {
             public void afterTextChanged(Editable editable) {}
         });
 
-        if(experience.getPoints() != 0)
+        if(experience.getPoints() == 0)
+            pointsTextInput.setHint(String.valueOf(experience.getPoints()));
+        else
             pointsTextInput.setText(String.valueOf(experience.getPoints()));
     }
 

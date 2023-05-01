@@ -154,20 +154,23 @@ public class QuestionEditorFragment extends Fragment implements AnswerManager {
      * Setta il comportamento dell'input dei punti
      */
     private void setPointsText() {
-        pointsText.setText(String.valueOf(quizViewModel.getActiveQuestion().getPoints()));
-
         pointsText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                quizViewModel.getActiveQuestion().setPoints(charSequence.toString().equals("") ? 0 : Integer.parseInt(charSequence.toString()));
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void afterTextChanged(Editable editable) {}
+            public void afterTextChanged(Editable editable) {
+                quizViewModel.getActiveQuestion().setPoints(editable.toString().equals("") ? 0 : Integer.parseInt(editable.toString()));
+            }
         });
+
+        if(quizViewModel.getActiveQuestion().getPoints() == 0)
+            pointsText.setHint(String.valueOf(quizViewModel.getActiveQuestion().getPoints()));
+        else
+            pointsText.setText(String.valueOf(quizViewModel.getActiveQuestion().getPoints()));
     }
 
     /**
