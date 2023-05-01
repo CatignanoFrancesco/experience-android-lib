@@ -20,4 +20,5 @@ public interface ExperienceStorage {
     void removeExperienceById(Object operaId, Experience experience);
     void removeQuestionById(String quizId, Question question);
     void removeAnswerById(String quizId, String questionId, Answer answer);
+    void removeAnswerBySingleQuestion(String singleQuestionId, Answer answer);
 }

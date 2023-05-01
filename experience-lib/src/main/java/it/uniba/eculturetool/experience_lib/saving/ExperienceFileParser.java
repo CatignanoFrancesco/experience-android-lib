@@ -21,6 +21,7 @@ import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
+import it.uniba.eculturetool.experience_lib.models.SingleQuestion;
 
 /**
  * Classe che si occupa di creare e leggere i file relativi alle experience
@@ -33,6 +34,7 @@ public class ExperienceFileParser {
     private static final String TYPE_FIND_DETAILS = "find_details";
     private static final String TYPE_FIND_RFID = "find_rfid";
     private static final String TYPE_FIND_THE_DIFFERENCE = "find_the_difference";
+    private static final String TYPE_SINGLE_QUESTION = "single_question";
 
     private ExperienceFileParser() {}
 
@@ -82,6 +84,7 @@ public class ExperienceFileParser {
         if(type.equals(TYPE_PATTERN)) return Pattern.class;
         if(type.equals(TYPE_FIND_DETAILS)) return FindDetails.class;
         if(type.equals(TYPE_FIND_RFID)) return FindRFID.class;
+        if(type.equals(TYPE_SINGLE_QUESTION)) return SingleQuestion.class;
         return FindTheDifference.class;
     }
 }
