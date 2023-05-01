@@ -34,6 +34,8 @@ import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerManager;
 import it.uniba.eculturetool.experience_lib.listeners.OnClickDeleteListener;
 import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
+import it.uniba.eculturetool.experience_lib.models.Experience;
+import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.SingleQuestion;
 import it.uniba.eculturetool.experience_lib.ui.SingleQuestionUI;
 
@@ -69,11 +71,6 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
             operaId = getArguments().getString(KEY_OPERA_ID);
             singleQuestionId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
-
-        viewModel = new ViewModelProvider(requireActivity()).get(SingleQuestionViewModel.class);
-        experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
-
-        experienceViewModel.setExperience(viewModel.getSingleQuestion());
     }
 
     @Override
@@ -84,6 +81,20 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(SingleQuestionViewModel.class);
+        experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
+
+        Set<Experience> experiences = experienceDataHolder.getExperienceByOperaId(operaId);
+        if(experiences != null) {
+            for(Experience experience : experiences) {
+                if(experience.getId().equals(singleQuestionId)) {
+                    viewModel.setSingleQuestion((SingleQuestion) experience);
+                    break;
+                }
+            }
+        }
+        experienceViewModel.setExperience(viewModel.getSingleQuestion());
 
         questionEditText = view.findViewById(ui.singleQuestionEditorUi.questionEditText);
         answersRecyclerView = view.findViewById(ui.singleQuestionEditorUi.answersRecyclerViewId);
