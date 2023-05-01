@@ -85,7 +85,8 @@ public class ExperienceEditorFragment extends Fragment {
             public void afterTextChanged(Editable editable) {}
         });
 
-        pointsTextInput.setText(String.valueOf(experience.getPoints()));
+        if(experience.getPoints() != 0)
+            pointsTextInput.setText(String.valueOf(experience.getPoints()));
     }
 
     private void setDifficulty() {
