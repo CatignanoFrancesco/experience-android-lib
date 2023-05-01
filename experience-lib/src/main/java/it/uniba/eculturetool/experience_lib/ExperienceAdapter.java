@@ -28,6 +28,7 @@ import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
+import it.uniba.eculturetool.experience_lib.models.SingleQuestion;
 import it.uniba.eculturetool.experience_lib.saving.ExperienceFileParser;
 import it.uniba.eculturetool.experience_lib.ui.ExperienceUI;
 import it.uniba.eculturetool.experience_lib.utils.EctExpLibFileProvider;
@@ -93,6 +94,10 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         else if(experience instanceof FindDetails) {
             holder.typeImage.setImageResource(R.drawable.ic_find_details);
             holder.typeText.setText(R.string.find_details);
+        }
+        else if(experience instanceof SingleQuestion) {
+            holder.typeImage.setImageResource(R.drawable.ic_quiz_24);
+            holder.typeText.setText(R.string.single_question);
         }
 
         // Click
