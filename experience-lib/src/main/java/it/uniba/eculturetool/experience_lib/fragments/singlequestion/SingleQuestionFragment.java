@@ -18,16 +18,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
+import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.TimedExperienceEditorFragment;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerAdapter;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerManager;
 import it.uniba.eculturetool.experience_lib.listeners.OnClickDeleteListener;
 import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
+import it.uniba.eculturetool.experience_lib.models.SingleQuestion;
 import it.uniba.eculturetool.experience_lib.ui.SingleQuestionUI;
 
 public class SingleQuestionFragment extends Fragment implements AnswerManager {
@@ -90,6 +95,13 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
 
         setupQuestionText();
         setupRecyclerView();
+
+        saveButton.setOnClickListener(v -> {
+            if(validate()) {
+                experienceDataHolder.addExperienceToOpera(operaId, viewModel.getSingleQuestion());
+                requireActivity().finish();
+            }
+        });
     }
 
     private void setupQuestionText() {
@@ -132,5 +144,34 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
         viewModel.addAnswer(answer);
         adapter.addAnswer(answer);
         adapter.notifyDataSetChanged();
+    }
+
+    private boolean validate() {
+        SingleQuestion question = viewModel.getSingleQuestion();
+        Set<Answer> answers = viewModel.getSingleQuestion().getAnswers();
+
+        if(question.getQuestion() == null || question.getQuestion().isEmpty()) {
+            questionEditText.setError(getString(R.string.questions_empty));
+            questionEditText.requestFocus();
+            return false;
+        }
+
+        if(answers == null || answers.isEmpty()) {
+            Toast.makeText(requireContext(), R.string.answers_missing, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(question.countCorrectAnswers() == 0) {
+            Toast.makeText(requireContext(), R.string.correct_answer_missing, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(question.countCorrectAnswers() == answers.size()) {
+            Toast.makeText(requireContext(), R.string.incorrect_answer_missing, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        TimedExperienceEditorFragment fragment = (TimedExperienceEditorFragment) getChildFragmentManager().findFragmentById(ui.singleQuestionEditorUi.experienceFragmentContainerViewId);
+        return fragment.validate();
     }
 }

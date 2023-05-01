@@ -45,4 +45,13 @@ public class SingleQuestion extends TimedExperience {
     public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
     }
+
+    public int countCorrectAnswers() {
+        int c = 0;
+        for(Answer answer : answers) {
+            if(answer.isCorrect()) c++;
+        }
+
+        return c;
+    }
 }
