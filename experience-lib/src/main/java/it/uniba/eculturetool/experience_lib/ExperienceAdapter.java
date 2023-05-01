@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
@@ -72,7 +71,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
 
         // Immagini
         if(experience instanceof Quiz) {
-            holder.typeImage.setImageResource(R.drawable.ic_quiz_24);
+            holder.typeImage.setImageResource(R.drawable.ic_quiz_48);
             holder.typeText.setText(R.string.quiz);
         }
         else if(experience instanceof Puzzle) {
@@ -96,7 +95,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
             holder.typeText.setText(R.string.find_details);
         }
         else if(experience instanceof SingleQuestion) {
-            holder.typeImage.setImageResource(R.drawable.ic_quiz_24);
+            holder.typeImage.setImageResource(R.drawable.ic_question_24);
             holder.typeText.setText(R.string.single_question);
         }
 

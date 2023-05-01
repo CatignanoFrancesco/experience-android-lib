@@ -59,7 +59,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         if(image != null)
             holder.questionImage.setImageDrawable(new BitmapDrawable(context.getResources(), image));
         else
-            holder.questionImage.setImageResource(R.drawable.ic_quiz_24);
+            holder.questionImage.setImageResource(R.drawable.ic_question_24);
     }
 
     @Override
