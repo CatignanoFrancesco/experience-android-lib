@@ -4,7 +4,7 @@ public class SingleQuestionUI {
     private static SingleQuestionUI instance;
 
     public final SingleQuestionEditorUI singleQuestionEditorUi = new SingleQuestionEditorUI();
-    public final AnswerAdapterUI answerAdapterUi = new AnswerAdapterUI();
+    public final QuizUI.AnswerAdapterUI answerAdapterUi = new QuizUI.AnswerAdapterUI();
 
     // Question editor
     public static class SingleQuestionEditorUI {
@@ -14,13 +14,6 @@ public class SingleQuestionUI {
         public int addAnswerButtonId;
         public int answersRecyclerViewId;
         public int saveButtonId;
-    }
-
-    // AnswerAdapter
-    public static class AnswerAdapterUI {
-        public int layout;
-        public int layoutId;
-        public int answerTextViewId;
     }
 
     private SingleQuestionUI() {}

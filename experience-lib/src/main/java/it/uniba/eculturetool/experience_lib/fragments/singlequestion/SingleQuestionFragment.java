@@ -25,6 +25,7 @@ import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerAdapter;
 import it.uniba.eculturetool.experience_lib.fragments.quiz.AnswerManager;
+import it.uniba.eculturetool.experience_lib.listeners.OnClickDeleteListener;
 import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
 import it.uniba.eculturetool.experience_lib.ui.SingleQuestionUI;
@@ -88,6 +89,7 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
         ((OnDataLoadListener) requireActivity()).onDataLoad();
 
         setupQuestionText();
+        setupRecyclerView();
     }
 
     private void setupQuestionText() {
@@ -118,12 +120,17 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
                 requireContext(),
                 new ArrayList<>(viewModel.getSingleQuestion().getAnswers()),
                 this,
-                answer -> {}
+                answer -> {
+                    viewModel.getSingleQuestion().getAnswers().remove(answer);
+                    ((OnClickDeleteListener<Object>) requireActivity()).onClickDelete(answer);
+                }
         );
     }
 
     @Override
     public void onAnswerCreated(Answer answer) {
-
+        viewModel.addAnswer(answer);
+        adapter.addAnswer(answer);
+        adapter.notifyDataSetChanged();
     }
 }
