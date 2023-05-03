@@ -1,5 +1,7 @@
 package it.uniba.eculturetool.experience_lib.fragments.hittheenemy;
 
+import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_EXPERIENCE_ID;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,6 @@ import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyEditorFragment extends Fragment {
     private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
-    private static final String HIT_THE_ENEMY_ID = "HIT_THE_ENEMY_ID";
     private String hitTheEnemyId;
 
     private ImageView characterImage, backgroundImage, enemyImage, hitImage;
@@ -32,7 +33,7 @@ public class HitTheEnemyEditorFragment extends Fragment {
     public static HitTheEnemyEditorFragment newInstance(String hitTheEnemyId) {
         HitTheEnemyEditorFragment fragment = new HitTheEnemyEditorFragment();
         Bundle args = new Bundle();
-        args.putString(HIT_THE_ENEMY_ID, hitTheEnemyId);
+        args.putString(KEY_EXPERIENCE_ID, hitTheEnemyId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -41,7 +42,7 @@ public class HitTheEnemyEditorFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            hitTheEnemyId = getArguments().getString(HIT_THE_ENEMY_ID);
+            hitTheEnemyId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
     }
 

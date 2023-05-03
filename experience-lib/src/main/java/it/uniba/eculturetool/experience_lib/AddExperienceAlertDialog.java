@@ -34,7 +34,7 @@ public class AddExperienceAlertDialog {
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.add_experience_title))
                 .setItems(
-                        new String[]{puzzle, quiz, findTheDifference, pattern, findRfid, findDetails, singleQuestion},
+                        new String[]{puzzle, quiz, findTheDifference, pattern, findRfid, findDetails, singleQuestion, hitTheEnemy},
                         (dialogInterface, i) -> {
                             Experience experience;
                             switch (i) {
