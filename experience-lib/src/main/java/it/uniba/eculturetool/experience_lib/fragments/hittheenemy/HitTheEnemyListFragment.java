@@ -37,7 +37,8 @@ public class HitTheEnemyListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_hit_the_enemy_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return null;//inflater.inflate(R.layout.fragment_hit_the_enemy_list, container, false);
     }
 }
