@@ -24,6 +24,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
 import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
+import it.uniba.eculturetool.experience_lib.models.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
@@ -97,6 +98,10 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         else if(experience instanceof SingleQuestion) {
             holder.typeImage.setImageResource(R.drawable.ic_question_24);
             holder.typeText.setText(R.string.single_question);
+        }
+        else if(experience instanceof HitTheEnemy) {
+            holder.typeImage.setImageResource(R.drawable.ic_hit_the_enemy);
+            holder.typeText.setText(R.string.hit_the_enemy);
         }
 
         // Click
