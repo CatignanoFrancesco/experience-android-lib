@@ -1,8 +1,11 @@
-package it.uniba.eculturetool.experience_lib.models;
+package it.uniba.eculturetool.experience_lib.models.hittheenemy;
 
 import android.graphics.Bitmap;
 
-public class HitTheEnemy extends Experience {
+import it.uniba.eculturetool.experience_lib.models.Difficulty;
+import it.uniba.eculturetool.experience_lib.models.Experience;
+
+public class HitTheEnemyItem extends Experience {
     private String characterName;
     private String uriCharacter;
     private String uriBackground;
@@ -13,7 +16,7 @@ public class HitTheEnemy extends Experience {
     private transient Bitmap enemy;
     private transient Bitmap enemyHit;
 
-    public HitTheEnemy(String id, Difficulty difficulty, int points, String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
+    public HitTheEnemyItem(String id, Difficulty difficulty, int points, String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
         super(id, difficulty, points);
         this.characterName = characterName;
         this.uriCharacter = uriCharacter;
@@ -26,7 +29,7 @@ public class HitTheEnemy extends Experience {
         this.enemyHit = enemyHit;
     }
 
-    public HitTheEnemy(Difficulty difficulty, int points, String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
+    public HitTheEnemyItem(Difficulty difficulty, int points, String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
         super(difficulty, points);
         this.characterName = characterName;
         this.uriCharacter = uriCharacter;
@@ -39,7 +42,7 @@ public class HitTheEnemy extends Experience {
         this.enemyHit = enemyHit;
     }
 
-    public HitTheEnemy(String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
+    public HitTheEnemyItem(String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
         this.characterName = characterName;
         this.uriCharacter = uriCharacter;
         this.uriBackground = uriBackground;
@@ -51,7 +54,7 @@ public class HitTheEnemy extends Experience {
         this.enemyHit = enemyHit;
     }
 
-    public HitTheEnemy() {}
+    public HitTheEnemyItem() {}
 
     public String getCharacterName() {
         return characterName;
