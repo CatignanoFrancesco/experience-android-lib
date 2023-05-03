@@ -147,6 +147,7 @@ public class HitTheEnemyEditorFragment extends Fragment {
             hteItem.setCharacterSpeed((int) characterSpeedSlider.getValue());
             hteItem.setCharacterResistance((int) hitResistanceSlider.getValue());
             hteItem.setHitSpeed((int) hitSpeedSlider.getValue());
+            viewModel.saveActiveHitTheEnemy();
 
             Toast.makeText(requireContext(), R.string.hit_the_enemy_created, Toast.LENGTH_SHORT).show();
             ((HitTheEnemyFragment) getParentFragment()).onHitEnemyCreted();

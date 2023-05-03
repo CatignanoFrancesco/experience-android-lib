@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -73,5 +74,9 @@ public class HitTheEnemyListFragment extends Fragment {
             HitTheEnemyFragment fragment = (HitTheEnemyFragment) getParentFragment();
             fragment.addHitTheEnemy();
         });
+
+        adapter = new HitTheEnemyAdapter(requireContext(), viewModel.getHitTheEnemy().getHitTheEnemies());
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
     }
 }

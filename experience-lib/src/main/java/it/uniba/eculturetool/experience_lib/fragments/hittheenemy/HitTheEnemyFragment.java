@@ -64,7 +64,6 @@ public class HitTheEnemyFragment extends Fragment {
 
     public void addHitTheEnemy() {
         viewModel.setActiveHitTheEnemyItem(new HitTheEnemyItem());
-
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(ui.hitTheEnemyGeneralUi.fragmentContainerView, new HitTheEnemyEditorFragment())
@@ -73,8 +72,6 @@ public class HitTheEnemyFragment extends Fragment {
     }
 
     public void onHitEnemyCreted() {
-        viewModel.setActiveHitTheEnemyItem(null);
-
         HitTheEnemyListFragment fragment = HitTheEnemyListFragment.newInstance(operaId, hitTheEnemyId);
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
