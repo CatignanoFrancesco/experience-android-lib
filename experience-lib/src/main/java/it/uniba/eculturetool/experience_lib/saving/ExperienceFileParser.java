@@ -18,6 +18,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
 import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
+import it.uniba.eculturetool.experience_lib.models.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
@@ -35,6 +36,7 @@ public class ExperienceFileParser {
     private static final String TYPE_FIND_RFID = "find_rfid";
     private static final String TYPE_FIND_THE_DIFFERENCE = "find_the_difference";
     private static final String TYPE_SINGLE_QUESTION = "single_question";
+    private static final String TYPE_HIT_THE_ENEMY = "hit_the_enemy";
 
     private ExperienceFileParser() {}
 
@@ -75,6 +77,7 @@ public class ExperienceFileParser {
         if(experience instanceof Pattern) return TYPE_PATTERN;
         if(experience instanceof FindDetails) return TYPE_FIND_DETAILS;
         if(experience instanceof FindRFID) return TYPE_FIND_RFID;
+        if(experience instanceof HitTheEnemy) return TYPE_HIT_THE_ENEMY;
         return TYPE_FIND_THE_DIFFERENCE;
     }
 
@@ -85,6 +88,7 @@ public class ExperienceFileParser {
         if(type.equals(TYPE_FIND_DETAILS)) return FindDetails.class;
         if(type.equals(TYPE_FIND_RFID)) return FindRFID.class;
         if(type.equals(TYPE_SINGLE_QUESTION)) return SingleQuestion.class;
+        if(type.equals(TYPE_HIT_THE_ENEMY)) return HitTheEnemy.class;
         return FindTheDifference.class;
     }
 }
