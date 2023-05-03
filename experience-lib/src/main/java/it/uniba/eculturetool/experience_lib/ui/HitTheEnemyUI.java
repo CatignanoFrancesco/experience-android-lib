@@ -10,6 +10,7 @@ public class HitTheEnemyUI {
     public static class HitTheEnemyListUI {
         public int layout;
         public int recyclerViewId;
+        public int addHitTheEnemyButton;
     }
 
     public static class HitTheEnemyAdapterUI {
