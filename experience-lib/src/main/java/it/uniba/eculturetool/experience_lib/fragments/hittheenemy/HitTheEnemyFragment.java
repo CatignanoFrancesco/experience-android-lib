@@ -5,16 +5,21 @@ import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyFragment extends Fragment {
+    private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
     private String operaId;
     private String hitTheEnemyId;
 
@@ -35,26 +40,30 @@ public class HitTheEnemyFragment extends Fragment {
             operaId = getArguments().getString(KEY_OPERA_ID);
             hitTheEnemyId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(ui.hitTheEnemyGeneralUi.layout, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         HitTheEnemyListFragment fragment = HitTheEnemyListFragment.newInstance(operaId, hitTheEnemyId);
         getChildFragmentManager()
                 .beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.hit_the_enemy_fragment_container_view, fragment)
+                .add(ui.hitTheEnemyGeneralUi.fragmentContainerView, fragment)
                 .commit();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_hit_the_enemy, container, false);
     }
 
     public void addHitTheEnemy() {
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
+                .replace(ui.hitTheEnemyGeneralUi.fragmentContainerView, new HitTheEnemyEditorFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .addToBackStack(null)
-                .replace(R.id.hit_the_enemy_fragment_container_view, new HitTheEnemyEditorFragment())
                 .commit();
     }
 }

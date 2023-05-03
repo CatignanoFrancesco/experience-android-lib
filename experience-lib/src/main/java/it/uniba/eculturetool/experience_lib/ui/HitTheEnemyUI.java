@@ -3,9 +3,15 @@ package it.uniba.eculturetool.experience_lib.ui;
 public class HitTheEnemyUI {
     private static HitTheEnemyUI instance;
 
+    public final HitTheEnemyGeneralUI hitTheEnemyGeneralUi = new HitTheEnemyGeneralUI();
     public final HitTheEnemyListUI hitTheEnemyListUi = new HitTheEnemyListUI();
     public final HitTheEnemyAdapterUI hitTheEnemyAdapterUi = new HitTheEnemyAdapterUI();
     public final HitTheEnemyEditorUI hitTheEnemyEditorUi = new HitTheEnemyEditorUI();
+
+    public static class HitTheEnemyGeneralUI {
+        public int layout;
+        public int fragmentContainerView;
+    }
 
     public static class HitTheEnemyListUI {
         public int layout;
