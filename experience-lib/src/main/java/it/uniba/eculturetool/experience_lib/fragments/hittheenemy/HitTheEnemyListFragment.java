@@ -17,17 +17,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.Set;
+
+import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
+import it.uniba.eculturetool.experience_lib.models.Experience;
+import it.uniba.eculturetool.experience_lib.models.Puzzle;
+import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyListFragment extends Fragment {
     private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
+    private final ExperienceDataHolder experienceDataHolder = ExperienceDataHolder.getInstance();
     private String operaId;
     private String hitTheEnemyId;
     private HitTheEnemyViewModel viewModel;
 
     private RecyclerView recyclerView;
     private HitTheEnemyAdapter adapter;
-    private Button addHitTheEnemyButton;
+    private Button addHitTheEnemyButton, saveButton;
 
     public HitTheEnemyListFragment() {}
 
@@ -62,6 +69,17 @@ public class HitTheEnemyListFragment extends Fragment {
 
         addHitTheEnemyButton = view.findViewById(ui.hitTheEnemyListUi.addHitTheEnemyButton);
         recyclerView = view.findViewById(ui.hitTheEnemyListUi.recyclerViewId);
+        saveButton = view.findViewById(ui.hitTheEnemyListUi.saveButton);
+
+        Set<Experience> experiences = experienceDataHolder.getExperienceByOperaId(operaId);
+        if(experiences != null) {
+            for(Experience experience : experiences) {
+                if(experience.getId().equals(hitTheEnemyId)) {
+                    viewModel.setHitTheEnemy((HitTheEnemy) experience);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -76,6 +94,11 @@ public class HitTheEnemyListFragment extends Fragment {
         adapter = new HitTheEnemyAdapter(requireContext(), viewModel.getHitTheEnemy().getHitTheEnemies(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
+
+        saveButton.setOnClickListener(v -> {
+            experienceDataHolder.addExperienceToOpera(operaId, viewModel.getHitTheEnemy());
+            requireActivity().finish();
+        });
     }
 
     public void onItemClick(int position) {
