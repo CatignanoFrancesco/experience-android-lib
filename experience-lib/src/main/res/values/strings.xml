@@ -85,6 +85,12 @@
     <string name="details_missing">Select the details to find</string>
     <string name="single_question">Single question</string>
     <string name="difficulty_text_indicator">Difficulty: %s</string>
+    <string name="character_name_empty">Character name is missing</string>
+    <string name="character_image_missing">Character image is missing</string>
+    <string name="background_image_missing">Background image is missing</string>
+    <string name="enemy_image_missing">Enemy image is missing</string>
+    <string name="enemy_hit_image_missing">Enemy hit image is missing</string>
+    <string name="hit_the_enemy_created">Item created successfully</string>
 
     <string name="hit_the_enemy">Hit the enemy</string>
 

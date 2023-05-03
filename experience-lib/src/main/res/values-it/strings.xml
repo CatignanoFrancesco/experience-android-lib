@@ -81,6 +81,12 @@
     <string name="details_missing">Seleziona i dettagli da trovare</string>
     <string name="single_question">Domanda singola</string>
     <string name="difficulty_text_indicator">Difficoltà: %s</string>
+    <string name="character_name_empty">Inserire il nome del personaggio</string>
+    <string name="character_image_missing">Inserire l\'immagine del personaggio</string>
+    <string name="background_image_missing">Inserire l\'immagine di sfondo</string>
+    <string name="enemy_image_missing">Inserire l\'immagine del nemico</string>
+    <string name="enemy_hit_image_missing">Inserire l\'immagine del colpo del nemico</string>
+    <string name="hit_the_enemy_created">Elemento creato con successo</string>
 
     <string name="hit_the_enemy">Colpisci il nemico</string>
 

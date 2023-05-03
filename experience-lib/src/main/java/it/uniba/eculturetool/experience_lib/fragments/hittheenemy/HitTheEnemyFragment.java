@@ -9,19 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemyItem;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyFragment extends Fragment {
     private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
     private String operaId;
     private String hitTheEnemyId;
+    private HitTheEnemyViewModel viewModel;
 
     public HitTheEnemyFragment() {}
     public static HitTheEnemyFragment newInstance(String operaId, String experienceId) {
@@ -40,6 +41,8 @@ public class HitTheEnemyFragment extends Fragment {
             operaId = getArguments().getString(KEY_OPERA_ID);
             hitTheEnemyId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
+
+        viewModel = new ViewModelProvider(requireActivity()).get(HitTheEnemyViewModel.class);
     }
 
     @Override
@@ -60,10 +63,23 @@ public class HitTheEnemyFragment extends Fragment {
     }
 
     public void addHitTheEnemy() {
+        viewModel.setActiveHitTheEnemyItem(new HitTheEnemyItem());
+
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(ui.hitTheEnemyGeneralUi.fragmentContainerView, new HitTheEnemyEditorFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
+    }
+
+    public void onHitEnemyCreted() {
+        viewModel.setActiveHitTheEnemyItem(null);
+
+        HitTheEnemyListFragment fragment = HitTheEnemyListFragment.newInstance(operaId, hitTheEnemyId);
+        getChildFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(ui.hitTheEnemyGeneralUi.fragmentContainerView, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                 .commit();
     }
 }

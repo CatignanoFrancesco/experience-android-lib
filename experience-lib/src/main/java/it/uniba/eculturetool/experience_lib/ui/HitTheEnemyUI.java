@@ -17,6 +17,7 @@ public class HitTheEnemyUI {
         public int layout;
         public int recyclerViewId;
         public int addHitTheEnemyButton;
+        public int saveButton;
     }
 
     public static class HitTheEnemyAdapterUI {
@@ -29,6 +30,7 @@ public class HitTheEnemyUI {
 
     public static class HitTheEnemyEditorUI {
         public int layout;
+        public int experienceEditorFragmentContainerView;
         public int characterImageView;
         public int addCharacterImageButton;
         public int characterSpeedSlider;
@@ -41,6 +43,7 @@ public class HitTheEnemyUI {
         public int enemyHitImageView;
         public int addEnemyHitImageButton;
         public int hitSpeedSlider;
+        public int saveButton;
     }
 
     private HitTheEnemyUI() {}
