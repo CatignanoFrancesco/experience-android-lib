@@ -4,7 +4,6 @@ import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,9 +25,6 @@ import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
 import com.squareup.picasso.Picasso;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import it.uniba.eculturetool.experience_lib.ExperienceEditorFragment;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
@@ -151,7 +147,7 @@ public class HitTheEnemyEditorFragment extends Fragment {
             viewModel.saveActiveHitTheEnemy();
 
             Toast.makeText(requireContext(), R.string.hit_the_enemy_created, Toast.LENGTH_SHORT).show();
-            ((HitTheEnemyFragment) getParentFragment()).onHitEnemyCreted();
+            ((HitTheEnemyFragment) getParentFragment()).back();
         });
     }
 

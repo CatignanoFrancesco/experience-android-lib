@@ -74,12 +74,16 @@ public class HitTheEnemyFragment extends Fragment {
                 .commit();
     }
 
-    public void onHitEnemyCreted() {
+    public void back() {
         HitTheEnemyListFragment fragment = HitTheEnemyListFragment.newInstance(operaId, hitTheEnemyId);
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(ui.hitTheEnemyGeneralUi.fragmentContainerView, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                 .commit();
+    }
+
+    public Fragment getActualFragment() {
+        return getChildFragmentManager().findFragmentById(ui.hitTheEnemyGeneralUi.fragmentContainerView);
     }
 }
