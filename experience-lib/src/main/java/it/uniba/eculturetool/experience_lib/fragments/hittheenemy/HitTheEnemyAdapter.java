@@ -23,10 +23,12 @@ public class HitTheEnemyAdapter extends RecyclerView.Adapter<HitTheEnemyAdapter.
 
     private Context context;
     private List<HitTheEnemyItem> hitTheEnemies;
+    private HitTheEnemyListFragment fragment;
 
-    public HitTheEnemyAdapter(Context context, List<HitTheEnemyItem> hitTheEnemies) {
+    public HitTheEnemyAdapter(Context context, List<HitTheEnemyItem> hitTheEnemies, HitTheEnemyListFragment fragment) {
         this.context = context;
         this.hitTheEnemies = hitTheEnemies;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -42,6 +44,7 @@ public class HitTheEnemyAdapter extends RecyclerView.Adapter<HitTheEnemyAdapter.
         Picasso.get().load(hte.getUriCharacter()).into(holder.image);
         holder.name.setText(hte.getCharacterName());
         holder.difficulty.setText(context.getString(R.string.difficulty_text_indicator, hte.getDifficulty().toString()));
+        holder.layout.setOnClickListener(v -> fragment.onItemClick(position));
     }
 
     @Override

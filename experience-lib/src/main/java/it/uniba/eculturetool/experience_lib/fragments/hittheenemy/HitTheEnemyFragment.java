@@ -19,6 +19,7 @@ import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemyItem;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyFragment extends Fragment {
+    public static int NO_POSITION = -1;
     private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
     private String operaId;
     private String hitTheEnemyId;
@@ -62,8 +63,10 @@ public class HitTheEnemyFragment extends Fragment {
                 .commit();
     }
 
-    public void addHitTheEnemy() {
-        viewModel.setActiveHitTheEnemyItem(new HitTheEnemyItem());
+    public void addOrEditHitTheEnemy(int position) {
+        if(position < 0)
+            viewModel.setActiveHitTheEnemyItem(new HitTheEnemyItem());
+        else viewModel.setActiveHitTheEnemyItem(viewModel.getHitTheEnemy().getHitTheEnemies().get(position));
         getChildFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(ui.hitTheEnemyGeneralUi.fragmentContainerView, new HitTheEnemyEditorFragment())

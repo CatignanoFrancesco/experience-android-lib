@@ -73,9 +73,8 @@ public class HitTheEnemyEditorFragment extends Fragment {
 
         pickPhoto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                selectedImageView.setAlpha(1f);
                 Uri uri = result.getData().getData();
-                Picasso.get().load(uri).resize(selectedImageView.getWidth(), selectedImageView.getHeight()).centerCrop().into(selectedImageView);
+                setImage(uri, selectedImageView);
 
                 if(selectedImageView == characterImage)
                     viewModel.getActiveHitTheEnemyItem().setUriCharacter(uri.toString());
@@ -98,7 +97,7 @@ public class HitTheEnemyEditorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        experienceViewModel.setExperience(viewModel.getHitTheEnemy());
+        experienceViewModel.setExperience(viewModel.getActiveHitTheEnemyItem());
 
         characterImage = view.findViewById(ui.hitTheEnemyEditorUi.characterImageView);
         backgroundImage = view.findViewById(ui.hitTheEnemyEditorUi.backgroundImageView);
@@ -118,6 +117,8 @@ public class HitTheEnemyEditorFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        loadData();
 
         // Immagini
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -154,6 +155,34 @@ public class HitTheEnemyEditorFragment extends Fragment {
         });
     }
 
+    private void loadData() {
+        HitTheEnemyItem hitTheEnemyItem = viewModel.getActiveHitTheEnemyItem();
+
+        if(hitTheEnemyItem.getUriCharacter() != null)
+            setImage(Uri.parse(hitTheEnemyItem.getUriCharacter()), characterImage);
+
+        if(hitTheEnemyItem.getUriBackground() != null)
+            setImage(Uri.parse(hitTheEnemyItem.getUriBackground()), backgroundImage);
+
+        if(hitTheEnemyItem.getUriEnemy() != null)
+            setImage(Uri.parse(hitTheEnemyItem.getUriEnemy()), enemyImage);
+
+        if(hitTheEnemyItem.getUriEnemyHit() != null)
+            setImage(Uri.parse(hitTheEnemyItem.getUriEnemyHit()), hitImage);
+
+        if(hitTheEnemyItem.getHitSpeed() > 0)
+            hitSpeedSlider.setValue((float) hitTheEnemyItem.getHitSpeed());
+
+        if(hitTheEnemyItem.getCharacterSpeed() > 0)
+            characterSpeedSlider.setValue((float) hitTheEnemyItem.getCharacterSpeed());
+
+        if(hitTheEnemyItem.getCharacterResistance() > 0)
+            hitResistanceSlider.setValue((float) hitTheEnemyItem.getCharacterResistance());
+
+        if(hitTheEnemyItem.getCharacterName() != null)
+            characterNameEditText.setText(hitTheEnemyItem.getCharacterName());
+    }
+
     public boolean validate() {
         if(characterNameEditText.getText().toString().isEmpty()) {
             characterNameEditText.setError(getString(R.string.character_name_empty));
@@ -184,5 +213,18 @@ public class HitTheEnemyEditorFragment extends Fragment {
 
         ExperienceEditorFragment fragment = (ExperienceEditorFragment) getChildFragmentManager().findFragmentById(ui.hitTheEnemyEditorUi.experienceEditorFragmentContainerView);
         return fragment.validate();
+    }
+
+    private void setImage(Uri uri, ImageView imageView) {
+        Runnable onLayoutReady = () -> {
+            imageView.setAlpha(1f);
+            Picasso.get().load(uri).resize(imageView.getWidth(), imageView.getHeight()).centerCrop().into(imageView);
+        };
+
+        if(imageView.getWidth() == 0) {
+            imageView.addOnLayoutChangeListener((view, i, i1, i2, i3, i4, i5, i6, i7) -> onLayoutReady.run());
+        } else {
+            onLayoutReady.run();
+        }
     }
 }

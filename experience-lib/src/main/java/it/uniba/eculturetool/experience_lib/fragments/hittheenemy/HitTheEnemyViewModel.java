@@ -26,6 +26,10 @@ public class HitTheEnemyViewModel extends ViewModel {
     }
 
     public void saveActiveHitTheEnemy() {
+        if(hitTheEnemy.getHitTheEnemies().contains(activeHitTheEnemyItem)) {
+            hitTheEnemy.getHitTheEnemies().remove(activeHitTheEnemyItem);
+        }
+
         hitTheEnemy.getHitTheEnemies().add(activeHitTheEnemyItem);
         activeHitTheEnemyItem = new HitTheEnemyItem();
     }

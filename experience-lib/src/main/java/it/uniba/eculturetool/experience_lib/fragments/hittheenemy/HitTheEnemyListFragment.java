@@ -17,8 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import it.uniba.eculturetool.experience_lib.R;
-import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyListFragment extends Fragment {
@@ -72,11 +70,16 @@ public class HitTheEnemyListFragment extends Fragment {
 
         addHitTheEnemyButton.setOnClickListener(v -> {
             HitTheEnemyFragment fragment = (HitTheEnemyFragment) getParentFragment();
-            fragment.addHitTheEnemy();
+            fragment.addOrEditHitTheEnemy(HitTheEnemyFragment.NO_POSITION);
         });
 
-        adapter = new HitTheEnemyAdapter(requireContext(), viewModel.getHitTheEnemy().getHitTheEnemies());
+        adapter = new HitTheEnemyAdapter(requireContext(), viewModel.getHitTheEnemy().getHitTheEnemies(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
+    }
+
+    public void onItemClick(int position) {
+        HitTheEnemyFragment fragment = (HitTheEnemyFragment) getParentFragment();
+        fragment.addOrEditHitTheEnemy(position);
     }
 }
