@@ -8,50 +8,23 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 public class HitTheEnemyItem extends Experience {
     private String characterName;
     private String uriCharacter;
+    private int characterSpeed;
+    private int characterResistance;
     private String uriBackground;
     private String uriEnemy;
     private String uriEnemyHit;
+    private int hitSpeed;
     private transient Bitmap character;
     private transient Bitmap background;
     private transient Bitmap enemy;
     private transient Bitmap enemyHit;
 
-    public HitTheEnemyItem(String id, Difficulty difficulty, int points, String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
+    public HitTheEnemyItem(String id, Difficulty difficulty, int points) {
         super(id, difficulty, points);
-        this.characterName = characterName;
-        this.uriCharacter = uriCharacter;
-        this.uriBackground = uriBackground;
-        this.uriEnemy = uriEnemy;
-        this.uriEnemyHit = uriEnemyHit;
-        this.character = character;
-        this.background = background;
-        this.enemy = enemy;
-        this.enemyHit = enemyHit;
     }
 
-    public HitTheEnemyItem(Difficulty difficulty, int points, String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
+    public HitTheEnemyItem(Difficulty difficulty, int points) {
         super(difficulty, points);
-        this.characterName = characterName;
-        this.uriCharacter = uriCharacter;
-        this.uriBackground = uriBackground;
-        this.uriEnemy = uriEnemy;
-        this.uriEnemyHit = uriEnemyHit;
-        this.character = character;
-        this.background = background;
-        this.enemy = enemy;
-        this.enemyHit = enemyHit;
-    }
-
-    public HitTheEnemyItem(String characterName, String uriCharacter, String uriBackground, String uriEnemy, String uriEnemyHit, Bitmap character, Bitmap background, Bitmap enemy, Bitmap enemyHit) {
-        this.characterName = characterName;
-        this.uriCharacter = uriCharacter;
-        this.uriBackground = uriBackground;
-        this.uriEnemy = uriEnemy;
-        this.uriEnemyHit = uriEnemyHit;
-        this.character = character;
-        this.background = background;
-        this.enemy = enemy;
-        this.enemyHit = enemyHit;
     }
 
     public HitTheEnemyItem() {}
@@ -126,5 +99,29 @@ public class HitTheEnemyItem extends Experience {
 
     public void setEnemyHit(Bitmap enemyHit) {
         this.enemyHit = enemyHit;
+    }
+
+    public int getCharacterSpeed() {
+        return characterSpeed;
+    }
+
+    public void setCharacterSpeed(int characterSpeed) {
+        this.characterSpeed = characterSpeed;
+    }
+
+    public int getCharacterResistance() {
+        return characterResistance;
+    }
+
+    public void setCharacterResistance(int characterResistance) {
+        this.characterResistance = characterResistance;
+    }
+
+    public int getHitSpeed() {
+        return hitSpeed;
+    }
+
+    public void setHitSpeed(int hitSpeed) {
+        this.hitSpeed = hitSpeed;
     }
 }
