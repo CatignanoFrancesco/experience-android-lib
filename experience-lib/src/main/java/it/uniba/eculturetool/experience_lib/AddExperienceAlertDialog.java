@@ -11,6 +11,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
 import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
+import it.uniba.eculturetool.experience_lib.models.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
@@ -28,6 +29,7 @@ public class AddExperienceAlertDialog {
         String findRfid = context.getString(R.string.find_rfid);
         String findDetails = context.getString(R.string.find_details);
         String singleQuestion = context.getString(R.string.single_question);
+        String hitTheEnemy = context.getString(R.string.hit_the_enemy);
 
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.add_experience_title))
@@ -56,6 +58,9 @@ public class AddExperienceAlertDialog {
                                     break;
                                 case 6:
                                     experience = new SingleQuestion();
+                                    break;
+                                case 7:
+                                    experience = new HitTheEnemy();
                                     break;
                                 default: experience = null;
                             }

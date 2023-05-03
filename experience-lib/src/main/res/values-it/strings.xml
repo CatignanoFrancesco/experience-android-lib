@@ -81,6 +81,8 @@
     <string name="details_missing">Seleziona i dettagli da trovare</string>
     <string name="single_question">Domanda singola</string>
 
+    <string name="hit_the_enemy">Colpisci il nemico</string>
+
     <!-- Tag -->
     <string name="msg_internet_non_disponibile">Internet non è disponibile</string>
 </resources>

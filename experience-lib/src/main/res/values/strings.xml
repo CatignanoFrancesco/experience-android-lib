@@ -85,5 +85,7 @@
     <string name="details_missing">Select the details to find</string>
     <string name="single_question">Single question</string>
 
+    <string name="hit_the_enemy">Hit the enemy</string>
+
     <string name="msg_internet_non_disponibile">Internet is not available</string>
 </resources>
