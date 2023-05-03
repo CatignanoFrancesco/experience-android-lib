@@ -80,6 +80,7 @@
     <string name="details_message_hint">Trova le colonne gotiche</string>
     <string name="details_missing">Seleziona i dettagli da trovare</string>
     <string name="single_question">Domanda singola</string>
+    <string name="difficulty_text_indicator">Difficoltà: %s</string>
 
     <string name="hit_the_enemy">Colpisci il nemico</string>
 

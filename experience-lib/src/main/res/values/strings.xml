@@ -84,6 +84,7 @@
     <string name="details_message_hint">Find the gothic columns</string>
     <string name="details_missing">Select the details to find</string>
     <string name="single_question">Single question</string>
+    <string name="difficulty_text_indicator">Difficulty: %s</string>
 
     <string name="hit_the_enemy">Hit the enemy</string>
 

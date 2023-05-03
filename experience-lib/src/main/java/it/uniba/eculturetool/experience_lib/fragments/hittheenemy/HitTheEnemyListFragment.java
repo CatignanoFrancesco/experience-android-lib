@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
+
 public class HitTheEnemyListFragment extends Fragment {
+    private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
     private String operaId;
     private String hitTheEnemyId;
 
@@ -37,8 +40,7 @@ public class HitTheEnemyListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return null;//inflater.inflate(R.layout.fragment_hit_the_enemy_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(ui.hitTheEnemyListUi.layout, container, false);
     }
 }
