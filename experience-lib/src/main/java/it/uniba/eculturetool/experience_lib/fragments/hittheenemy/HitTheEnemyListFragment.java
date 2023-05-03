@@ -68,5 +68,10 @@ public class HitTheEnemyListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        addHitTheEnemyButton.setOnClickListener(v -> {
+            HitTheEnemyFragment fragment = (HitTheEnemyFragment) getParentFragment();
+            fragment.addHitTheEnemy();
+        });
     }
 }
