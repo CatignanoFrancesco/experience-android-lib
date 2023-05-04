@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
@@ -75,9 +77,8 @@ public class HitTheEnemyEditorFragment extends Fragment {
         pickPhoto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                 Uri uri = result.getData().getData();
-                setImage(uri, selectedImageView);
-
                 Bitmap bitmap;
+
                 try {
                     InputStream inputStream = requireActivity().getContentResolver().openInputStream(uri);
                     bitmap = BitmapFactory.decodeStream(inputStream);
@@ -102,6 +103,8 @@ public class HitTheEnemyEditorFragment extends Fragment {
                     viewModel.getActiveHitTheEnemyItem().setUriEnemyHit(uri.toString());
                     viewModel.getActiveHitTheEnemyItem().setEnemyHit(bitmap);
                 }
+
+                setImage(uri, selectedImageView);
             }
         });
     }
@@ -130,13 +133,13 @@ public class HitTheEnemyEditorFragment extends Fragment {
         hitSpeedSlider = view.findViewById(ui.hitTheEnemyEditorUi.hitSpeedSlider);
         hitResistanceSlider = view.findViewById(ui.hitTheEnemyEditorUi.characterResistanceSlider);
         saveButton = view.findViewById(ui.hitTheEnemyEditorUi.saveButton);
+
+        loadData();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        loadData();
 
         // Immagini
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
