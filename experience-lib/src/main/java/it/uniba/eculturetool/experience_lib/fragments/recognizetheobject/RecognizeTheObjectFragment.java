@@ -145,6 +145,9 @@ public class RecognizeTheObjectFragment extends Fragment {
 
         saveButton.setOnClickListener(v -> {
             if(validate()) {
+                viewModel.getRecognizeTheObject().setDescription(descriptionEditText.getText().toString());
+                viewModel.getRecognizeTheObject().setModelName(modelNameEditText.getText().toString());
+
                 dataHolder.addExperienceToOpera(operaId, viewModel.getRecognizeTheObject());
                 requireActivity().finish();
             }
