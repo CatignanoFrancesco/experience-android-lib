@@ -3,15 +3,38 @@ package it.uniba.eculturetool.experience_lib.fragments.recognizetheobject;
 import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_EXPERIENCE_ID;
 import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_OPERA_ID;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Set;
+
+import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
+import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.models.Experience;
+import it.uniba.eculturetool.experience_lib.models.Puzzle;
+import it.uniba.eculturetool.experience_lib.models.RecognizeTheObject;
 import it.uniba.eculturetool.experience_lib.ui.RecognizeTheObjectUI;
 
 public class RecognizeTheObjectFragment extends Fragment {
@@ -19,6 +42,14 @@ public class RecognizeTheObjectFragment extends Fragment {
 
     private String operaId;
     private String recognizeTheObjectId;
+    private RecognizeTheObjectViewModel viewModel;
+    private ExperienceViewModel experienceViewModel;
+    private final ExperienceDataHolder dataHolder = ExperienceDataHolder.getInstance();
+
+    private ImageView referenceImage;
+    private Button addReferenceImageButton;
+    private EditText descriptionEditText, modelNameEditText;
+    private ActivityResultLauncher<Intent> pickPhoto;
 
     public RecognizeTheObjectFragment() {}
 
@@ -38,10 +69,66 @@ public class RecognizeTheObjectFragment extends Fragment {
             operaId = getArguments().getString(KEY_OPERA_ID);
             recognizeTheObjectId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
+
+        viewModel = new ViewModelProvider(requireActivity()).get(RecognizeTheObjectViewModel.class);
+        experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
+
+        pickPhoto = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if(result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                Uri uri = result.getData().getData();
+                setImage(uri);
+
+                try {
+                    InputStream inputStream = requireActivity().getContentResolver().openInputStream(uri);
+                    viewModel.getRecognizeTheObject().setReferenceImage(BitmapFactory.decodeStream(inputStream));
+                    viewModel.getRecognizeTheObject().setUriReferenceImage(uri.toString());
+                }
+                catch(FileNotFoundException ex) {}
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(ui.recognizeTheObjectFieldsUi.layout, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        addReferenceImageButton = view.findViewById(ui.recognizeTheObjectFieldsUi.addReferenceImageButton);
+        referenceImage = view.findViewById(ui.recognizeTheObjectFieldsUi.referenceImageView);
+        descriptionEditText = view.findViewById(ui.recognizeTheObjectFieldsUi.descriptionEditText);
+        modelNameEditText = view.findViewById(ui.recognizeTheObjectFieldsUi.modelNameEditText);
+
+        Set<Experience> experiences = dataHolder.getExperienceByOperaId(operaId);
+        if(experiences != null) {
+            for(Experience experience : experiences) {
+                if(experience.getId().equals(recognizeTheObjectId)) {
+                    viewModel.setRecognizeTheObject((RecognizeTheObject) experience);
+                    break;
+                }
+            }
+        }
+        experienceViewModel.setExperience(viewModel.getRecognizeTheObject());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    private void setImage(Uri uri) {
+        Runnable onImageReady = () -> {
+            referenceImage.setAlpha(1f);
+            Picasso.get().load(uri).resize(referenceImage.getWidth(), referenceImage.getHeight()).centerCrop().into(referenceImage);
+        };
+
+        if(referenceImage.getWidth() == 0) {
+            onImageReady.run();
+        } else {
+            onImageReady.run();
+        }
     }
 }

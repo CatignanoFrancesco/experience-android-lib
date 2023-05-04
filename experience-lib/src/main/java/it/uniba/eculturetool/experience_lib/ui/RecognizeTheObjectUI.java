@@ -8,9 +8,11 @@ public class RecognizeTheObjectUI {
 
     public static class RecognizeTheObjectFieldsUI {
         public int layout;
+        public int experienceFragmentContainerView;
         public int referenceImageView;
         public int addReferenceImageButton;
-        public int descriptionTextView;
+        public int descriptionEditText;
+        public int modelNameEditText;
     }
 
     private RecognizeTheObjectUI() {}
