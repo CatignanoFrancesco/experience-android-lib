@@ -91,6 +91,7 @@
     <string name="enemy_image_missing">Enemy image is missing</string>
     <string name="enemy_hit_image_missing">Enemy hit image is missing</string>
     <string name="hit_the_enemy_created">Item created successfully</string>
+    <string name="recognize_the_object">Recognize the object</string>
 
     <string name="hit_the_enemy">Hit the enemy</string>
 

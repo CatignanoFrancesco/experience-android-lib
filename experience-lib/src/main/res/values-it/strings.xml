@@ -87,6 +87,7 @@
     <string name="enemy_image_missing">Inserire l\'immagine del nemico</string>
     <string name="enemy_hit_image_missing">Inserire l\'immagine del colpo del nemico</string>
     <string name="hit_the_enemy_created">Elemento creato con successo</string>
+    <string name="recognize_the_object">Riconosci l\'oggetto</string>
 
     <string name="hit_the_enemy">Colpisci il nemico</string>
 
