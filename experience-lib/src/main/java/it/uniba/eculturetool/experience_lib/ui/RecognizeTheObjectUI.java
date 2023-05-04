@@ -13,6 +13,7 @@ public class RecognizeTheObjectUI {
         public int addReferenceImageButton;
         public int descriptionEditText;
         public int modelNameEditText;
+        public int saveButton;
     }
 
     private RecognizeTheObjectUI() {}

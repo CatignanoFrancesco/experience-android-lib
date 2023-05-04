@@ -80,6 +80,8 @@
     <string name="details_message_hint">Trova le colonne gotiche</string>
     <string name="details_missing">Seleziona i dettagli da trovare</string>
     <string name="single_question">Domanda singola</string>
+
+    <string name="hit_the_enemy">Colpisci il nemico</string>
     <string name="difficulty_text_indicator">Difficoltà: %s</string>
     <string name="character_name_empty">Inserire il nome del personaggio</string>
     <string name="character_image_missing">Inserire l\'immagine del personaggio</string>
@@ -87,9 +89,10 @@
     <string name="enemy_image_missing">Inserire l\'immagine del nemico</string>
     <string name="enemy_hit_image_missing">Inserire l\'immagine del colpo del nemico</string>
     <string name="hit_the_enemy_created">Elemento creato con successo</string>
-    <string name="recognize_the_object">Riconosci l\'oggetto</string>
 
-    <string name="hit_the_enemy">Colpisci il nemico</string>
+    <string name="recognize_the_object">Riconosci l\'oggetto</string>
+    <string name="reference_image_missing">Immagine di riferimento mancante</string>
+    <string name="description_missing">Descrizione mancante</string>
 
     <!-- Tag -->
     <string name="msg_internet_non_disponibile">Internet non è disponibile</string>
