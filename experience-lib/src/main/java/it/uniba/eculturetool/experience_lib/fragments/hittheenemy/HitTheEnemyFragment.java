@@ -15,10 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONException;
+
+import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemyItem;
+import it.uniba.eculturetool.experience_lib.saving.ExperienceFileParser;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
 
 public class HitTheEnemyFragment extends Fragment {
+    private static final String KEY_INITIAL_HIT_THE_ENEMY = "KEY_INITIAL_HIT_THE_ENEMY";
+
     public static int NO_POSITION = -1;
     private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
     private String operaId;
@@ -28,22 +34,46 @@ public class HitTheEnemyFragment extends Fragment {
     public HitTheEnemyFragment() {}
     public static HitTheEnemyFragment newInstance(String operaId, String experienceId) {
         HitTheEnemyFragment fragment = new HitTheEnemyFragment();
+        Bundle args = prepareBundle(operaId, experienceId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static HitTheEnemyFragment newInstance(String operaId, String experienceId, HitTheEnemy initialHitTheEnemy) {
+        HitTheEnemyFragment fragment = new HitTheEnemyFragment();
+        Bundle args = prepareBundle(operaId, experienceId);
+        args.putString(KEY_INITIAL_HIT_THE_ENEMY, ExperienceFileParser.toJson(initialHitTheEnemy));
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    private static Bundle prepareBundle(String operaId, String experienceId) {
         Bundle args = new Bundle();
         args.putString(KEY_EXPERIENCE_ID, experienceId);
         args.putString(KEY_OPERA_ID, operaId);
-        fragment.setArguments(args);
-        return fragment;
+        return args;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(HitTheEnemyViewModel.class);
+
         if (getArguments() != null) {
             operaId = getArguments().getString(KEY_OPERA_ID);
             hitTheEnemyId = getArguments().getString(KEY_EXPERIENCE_ID);
-        }
 
-        viewModel = new ViewModelProvider(requireActivity()).get(HitTheEnemyViewModel.class);
+            try {
+                if(getArguments().containsKey(KEY_INITIAL_HIT_THE_ENEMY)) {
+                    HitTheEnemy initialHitTheEnemy = (HitTheEnemy) ExperienceFileParser.toExperience(getArguments().getString(KEY_INITIAL_HIT_THE_ENEMY));
+
+                    viewModel.getHitTheEnemy().getHitTheEnemies().addAll(initialHitTheEnemy.getHitTheEnemies());
+                }
+            }
+            catch (JSONException e) {}
+
+        }
     }
 
     @Override
