@@ -174,7 +174,9 @@ public class RecognizeTheObjectFragment extends Fragment {
         };
 
         if(referenceImage.getWidth() == 0) {
-            onImageReady.run();
+            referenceImage.addOnLayoutChangeListener((view, i, i1, i2, i3, i4, i5, i6, i7) -> {
+                onImageReady.run();
+            });
         } else {
             onImageReady.run();
         }
