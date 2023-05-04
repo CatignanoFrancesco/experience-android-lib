@@ -4,6 +4,8 @@ import static it.uniba.eculturetool.experience_lib.ExperienceEditorFragment.KEY_
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -25,6 +27,9 @@ import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
 import com.squareup.picasso.Picasso;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import it.uniba.eculturetool.experience_lib.ExperienceEditorFragment;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
@@ -72,14 +77,31 @@ public class HitTheEnemyEditorFragment extends Fragment {
                 Uri uri = result.getData().getData();
                 setImage(uri, selectedImageView);
 
-                if(selectedImageView == characterImage)
+                Bitmap bitmap;
+                try {
+                    InputStream inputStream = requireActivity().getContentResolver().openInputStream(uri);
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                }
+                catch(FileNotFoundException ex) {
+                    return;
+                }
+
+                if(selectedImageView == characterImage) {
                     viewModel.getActiveHitTheEnemyItem().setUriCharacter(uri.toString());
-                else if(selectedImageView == backgroundImage)
+                    viewModel.getActiveHitTheEnemyItem().setCharacter(bitmap);
+                }
+                else if(selectedImageView == backgroundImage) {
                     viewModel.getActiveHitTheEnemyItem().setUriBackground(uri.toString());
-                else if(selectedImageView == enemyImage)
+                    viewModel.getActiveHitTheEnemyItem().setBackground(bitmap);
+                }
+                else if(selectedImageView == enemyImage) {
                     viewModel.getActiveHitTheEnemyItem().setUriEnemy(uri.toString());
-                else if(selectedImageView == hitImage)
+                    viewModel.getActiveHitTheEnemyItem().setEnemy(bitmap);
+                }
+                else if(selectedImageView == hitImage) {
                     viewModel.getActiveHitTheEnemyItem().setUriEnemyHit(uri.toString());
+                    viewModel.getActiveHitTheEnemyItem().setEnemyHit(bitmap);
+                }
             }
         });
     }
