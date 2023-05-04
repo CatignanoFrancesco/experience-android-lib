@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.util.Set;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
+import it.uniba.eculturetool.experience_lib.ExperienceEditorFragment;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.models.Experience;
@@ -162,7 +163,8 @@ public class RecognizeTheObjectFragment extends Fragment {
             return false;
         }
 
-        return true;
+        ExperienceEditorFragment experienceEditorFragment = (ExperienceEditorFragment) getChildFragmentManager().findFragmentById(ui.recognizeTheObjectFieldsUi.experienceFragmentContainerView);
+        return experienceEditorFragment.validate();
     }
 
     private void setImage(Uri uri) {
