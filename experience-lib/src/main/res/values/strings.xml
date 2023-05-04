@@ -96,4 +96,6 @@
     <string name="hit_the_enemy">Hit the enemy</string>
 
     <string name="msg_internet_non_disponibile">Internet is not available</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
