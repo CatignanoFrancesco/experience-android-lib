@@ -100,6 +100,8 @@
     <string name="description_missing">Description is missing</string>
 
     <string name="questionnaire">Questionnaire</string>
+    <string name="choose_questionnaire">Choose the questionnaire</string>
+    <string name="back">Back</string>
 
     <string name="msg_internet_non_disponibile">Internet is not available</string>
 </resources>

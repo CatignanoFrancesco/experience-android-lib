@@ -95,6 +95,8 @@
     <string name="description_missing">Descrizione mancante</string>
 
     <string name="questionnaire">Questionario</string>
+    <string name="choose_questionnaire">Scegli il questionario</string>
+    <string name="back">Indietro</string>
 
     <!-- Tag -->
     <string name="msg_internet_non_disponibile">Internet non è disponibile</string>
