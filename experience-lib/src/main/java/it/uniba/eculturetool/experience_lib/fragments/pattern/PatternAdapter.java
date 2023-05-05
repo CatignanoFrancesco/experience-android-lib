@@ -17,7 +17,6 @@ import it.uniba.eculturetool.experience_lib.ui.PatternUI;
 
 public class PatternAdapter extends BaseAdapter {
     private int[] matrix = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private static int maxNum = 0;
     private FragmentActivity activity;
 
     private final PatternUI ui = PatternUI.getInstance();
@@ -32,7 +31,7 @@ public class PatternAdapter extends BaseAdapter {
     public PatternAdapter(FragmentActivity activity, int[] matrix) {
         this(activity);
         this.matrix = matrix;
-        maxNum = max(matrix);
+        viewModel.setMaxNum(max(matrix));
     }
 
     public int getNumberOfSetDots() {
@@ -77,14 +76,14 @@ public class PatternAdapter extends BaseAdapter {
 
         holder.numberTextView.setOnClickListener(v -> {
             if(matrix[i] == 0) {
-                matrix[i] = ++maxNum;
+                matrix[i] = viewModel.incrementMaxNum();
                 holder.numberTextView.setText(String.valueOf(matrix[i]));
             } else {
                 for(int j=0; j<matrix.length; j++) {   // Update di tutti i numeri
                     if(matrix[j] > matrix[i]) matrix[j]--;
                 }
                 matrix[i] = 0;
-                if(maxNum > 0) maxNum--;
+                if(viewModel.getMaxNum() > 0) viewModel.setMaxNum(viewModel.getMaxNum() - 1);
             }
 
             viewModel.setMatrix(toMatrix(matrix));

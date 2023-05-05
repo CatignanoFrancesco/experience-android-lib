@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 
 public class PatternViewModel extends ViewModel {
+    private int maxNum = 0;
     private MutableLiveData<Pattern> pattern = new MutableLiveData<>(new Pattern());
 
     public LiveData<Pattern> getPattern() {
@@ -19,5 +20,17 @@ public class PatternViewModel extends ViewModel {
 
     public void setMatrix(int[][] matrix) {
         pattern.getValue().setMatrixPattern(matrix);
+    }
+
+    public int getMaxNum() {
+        return maxNum;
+    }
+
+    public void setMaxNum(int maxNum) {
+        this.maxNum = maxNum;
+    }
+
+    public int incrementMaxNum() {
+        return ++maxNum;
     }
 }

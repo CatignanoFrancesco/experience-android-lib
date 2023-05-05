@@ -75,18 +75,6 @@ public class AddExperienceAlertDialog {
                                 default: experience = null;
                             }
 
-                            if(addedExperiences != null) {
-                                for(Experience exp : addedExperiences) {
-                                    if(experience.getClass().equals(exp.getClass())) {
-                                        new AlertDialog.Builder(context)
-                                                .setTitle(R.string.warning)
-                                                .setMessage(R.string.error_selection)
-                                                .setNeutralButton(R.string.understand, (dialogInterface1, i1) -> {})
-                                                .show();
-                                        return;
-                                    }
-                                }
-                            }
                             onOkClick.accept(experience);
                         }
                 )
