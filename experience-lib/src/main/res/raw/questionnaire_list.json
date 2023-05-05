@@ -1,0 +1,195 @@
+[
+    {
+        "name": "SUS",
+        "preparedQuestions": [
+          {
+            "text": "Penso che utilizzerò spesso questo sistema.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho trovato il sistema piacevole da utilizzare.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho trovato il sistema molto disorganizzato.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho avuto bisogno di imparare molte cose prima di poter utilizzare il sistema.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho trovato le funzioni del sistema ben integrate tra loro.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho trovato il sistema molto difficile da utilizzare.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Mi sono sentito sicuro nel lavorare con il sistema.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho trovato il sistema molto inefficiente.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho avuto bisogno di aiuto da parte di altre persone per utilizzare il sistema.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          },
+          {
+            "text": "Ho trovato il sistema facile da utilizzare.",
+            "options": [
+              "Fortemente in disaccordo",
+              "In disaccordo",
+              "In parte d'accordo, in parte in disaccordo",
+              "D'accordo",
+              "Molto d'accordo"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SAM",
+        "preparedQuestions": [
+          {
+            "text": "Valenza",
+            "options": [
+              "1 - Molto sgradevole",
+              "2 - Sgradevole",
+              "3 - Neutro",
+              "4 - Piacere",
+              "5 - Molto piacere"
+            ]
+          },
+          {
+            "text": "Eccitazione",
+            "options": [
+              "1 - Calmo",
+              "2 - Rilassato",
+              "3 - Neutro",
+              "4 - Agitato",
+              "5 - Molto agitato"
+            ]
+          },
+          {
+            "text": "Dominanza",
+            "options": [
+              "1 - Sottomesso",
+              "2 - Poco influente",
+              "3 - Neutro",
+              "4 - Influente",
+              "5 - Molto influente"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "NASA-TLX",
+        "preparedQuestions": [
+          {
+            "text": "Fatica mentale",
+            "options": [
+              "Bassa",
+              "Media",
+              "Alta"
+            ]
+          },
+          {
+            "text": "Richiesta fisica",
+            "options": [
+              "Bassa",
+              "Media",
+              "Alta"
+            ]
+          },
+          {
+            "text": "Richiesta di tempo",
+            "options": [
+              "Bassa",
+              "Media",
+              "Alta"
+            ]
+          },
+          {
+            "text": "Performance",
+            "options": [
+              "Bassa",
+              "Media",
+              "Alta"
+            ]
+          },
+          {
+            "text": "Sforzo",
+            "options": [
+              "Basso",
+              "Medio",
+              "Alto"
+            ]
+          },
+          {
+            "text": "Frustrazione",
+            "options": [
+              "Bassa",
+              "Media",
+              "Alta"
+            ]
+          }
+        ]
+      }            
+]
