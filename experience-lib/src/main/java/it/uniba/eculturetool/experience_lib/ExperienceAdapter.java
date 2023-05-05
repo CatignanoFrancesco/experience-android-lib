@@ -68,8 +68,10 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     public void onBindViewHolder(@NonNull ExperienceViewHolder holder, int position) {
         Experience experience = experiences.get(position);
 
-        holder.difficultyText.setText(activity.getString(R.string.difficulty_value, experience.getDifficulty().toString(activity)));
-        holder.pointsText.setText(activity.getString(R.string.points_value, experience.getPoints()));
+        if(experience.getPoints() > 0) {
+            holder.difficultyText.setText(activity.getString(R.string.difficulty_value, experience.getDifficulty().toString(activity)));
+            holder.pointsText.setText(activity.getString(R.string.points_value, experience.getPoints()));
+        }
 
         // Immagini
         if(experience instanceof Quiz) {

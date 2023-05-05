@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,10 +69,11 @@ public class ExperienceFileParser {
 
     public static Experience toExperience(String jsonExperience) throws JSONException {
         // Eliminazione del campo "type" in modo da non creare problemi con la deserializzazione
-        JSONObject jsonObject = new JSONObject(jsonExperience);
-        String type = (String) jsonObject.remove(TYPE);
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(jsonExperience, JsonObject.class);
+        String type = jsonObject.remove(TYPE).getAsString();
 
-        return new Gson().fromJson(jsonObject.toString(), getClass(type));
+        return gson.fromJson(jsonObject, getClass(type));
     }
 
     private static String getType(Experience experience) {
