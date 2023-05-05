@@ -11,6 +11,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
 import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
+import it.uniba.eculturetool.experience_lib.models.Questionnaire;
 import it.uniba.eculturetool.experience_lib.models.RecognizeTheObject;
 import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
@@ -32,11 +33,12 @@ public class AddExperienceAlertDialog {
         String singleQuestion = context.getString(R.string.single_question);
         String hitTheEnemy = context.getString(R.string.hit_the_enemy);
         String recognizeTheObject = context.getString(R.string.recognize_the_object);
+        String questionnaire = context.getString(R.string.questionnaire);
 
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.add_experience_title))
                 .setItems(
-                        new String[]{puzzle, quiz, findTheDifference, pattern, findRfid, findDetails, singleQuestion, hitTheEnemy, recognizeTheObject},
+                        new String[]{puzzle, quiz, findTheDifference, pattern, findRfid, findDetails, singleQuestion, hitTheEnemy, recognizeTheObject, questionnaire},
                         (dialogInterface, i) -> {
                             Experience experience;
                             switch (i) {
@@ -66,6 +68,9 @@ public class AddExperienceAlertDialog {
                                     break;
                                 case 8:
                                     experience = new RecognizeTheObject();
+                                    break;
+                                case 9:
+                                    experience = new Questionnaire();
                                     break;
                                 default: experience = null;
                             }

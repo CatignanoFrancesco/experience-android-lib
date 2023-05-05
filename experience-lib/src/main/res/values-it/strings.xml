@@ -94,6 +94,8 @@
     <string name="reference_image_missing">Immagine di riferimento mancante</string>
     <string name="description_missing">Descrizione mancante</string>
 
+    <string name="questionnaire">Questionario</string>
+
     <!-- Tag -->
     <string name="msg_internet_non_disponibile">Internet non è disponibile</string>
 </resources>
