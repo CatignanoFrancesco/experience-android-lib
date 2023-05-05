@@ -104,7 +104,10 @@ public class QuestionnaireFragment extends Fragment {
         super.onStart();
 
         if(viewModel.getQuestionnaire().getName() == null) {
-            chooseQuestionnaireDialog(questionnaire -> viewModel.setQuestionnaire(questionnaire));
+            chooseQuestionnaireDialog(questionnaire -> {
+                viewModel.setQuestionnaire(questionnaire);
+                setupRecyclerView();
+            });
         }
 
         setupRecyclerView();
