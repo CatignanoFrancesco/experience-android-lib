@@ -10,16 +10,32 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toolbar;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
+
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
 import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.models.Experience;
+import it.uniba.eculturetool.experience_lib.models.Questionnaire;
 import it.uniba.eculturetool.experience_lib.ui.QuestionnaireUI;
 
 public class QuestionnaireFragment extends Fragment {
@@ -33,6 +49,7 @@ public class QuestionnaireFragment extends Fragment {
 
     private Toolbar toolbar;
     private RecyclerView recyclerView;
+    private QuestionnaireAdapter adapter;
     private Button saveButton;
 
     public QuestionnaireFragment() {}
@@ -56,6 +73,16 @@ public class QuestionnaireFragment extends Fragment {
             operaId = getArguments().getString(KEY_OPERA_ID);
             questionnaireId = getArguments().getString(KEY_EXPERIENCE_ID);
         }
+
+        Set<Experience> experiences = experienceDataHolder.getExperienceByOperaId(operaId);
+        if(experiences != null) {
+            for(Experience experience : experiences) {
+                if(experience.getId().equals(questionnaireId)) {
+                    viewModel.setQuestionnaire((Questionnaire) experience);
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -72,9 +99,48 @@ public class QuestionnaireFragment extends Fragment {
         saveButton = view.findViewById(ui.questionnaireFragmentUi.saveButton);
     }
 
-    private void chooseQuestionnaireDialog() {
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if(viewModel.getQuestionnaire().getName() == null) {
+            chooseQuestionnaireDialog(questionnaire -> viewModel.setQuestionnaire(questionnaire));
+        }
+
+        setupRecyclerView();
+    }
+
+    private void setupRecyclerView() {
+        adapter = new QuestionnaireAdapter(requireContext(), viewModel.getQuestionnaire().getPreparedQuestions());
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void chooseQuestionnaireDialog(Consumer<Questionnaire> onQuestionnaireClick) {
+        List<Questionnaire> questionnaireList;
+
+        // Ottengo la lista dei questionari disponibili
+        try(InputStream inputStream = getResources().openRawResource(R.raw.questionnaire_list)) {
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            String json = new String(buffer, StandardCharsets.UTF_8);
+
+            Type questionnaireListType = new TypeToken<ArrayList<Questionnaire>>() {}.getType();
+            questionnaireList = new Gson().fromJson(json, questionnaireListType);
+        }
+        catch (IOException e) {
+            Log.e(QuestionnaireFragment.class.getSimpleName(), "chooseQuestionnaireDialog: ", e);
+            return;
+        }
+
+        // Lista dei questionari
+        String[] questionnaireNames = questionnaireList.stream().map(Questionnaire::getName).toArray(String[]::new);
+
+        // Mostro il dialog
         new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.choose_questionnaire)
+                .setItems(questionnaireNames, (dialogInterface, i) -> onQuestionnaireClick.accept(questionnaireList.get(i)))
                 .setCancelable(false)
                 .setNegativeButton(R.string.back, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
