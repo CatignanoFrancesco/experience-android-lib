@@ -5,7 +5,7 @@ public class QuestionnaireUI {
 
     public final QuestionnaireFragmentUI questionnaireFragmentUi = new QuestionnaireFragmentUI();
     public final QuestionAdapterUI questionAdapterUi = new QuestionAdapterUI();
-    public final AnswerAdapterUI answerAdapterUi = new AnswerAdapterUI();
+    public final OptionAdapterUI optionAdapterUi = new OptionAdapterUI();
 
     // Lista delle domande
     public static class QuestionnaireFragmentUI {
@@ -22,10 +22,10 @@ public class QuestionnaireUI {
         public int answersRecyclerView;
     }
 
-    // Adapter della risposta
-    public static class AnswerAdapterUI {
+    // Adapter dell'opzione
+    public static class OptionAdapterUI {
         public int layout;
-        public int answerTextView;
+        public int optionTextView;
     }
 
     private QuestionnaireUI() {}

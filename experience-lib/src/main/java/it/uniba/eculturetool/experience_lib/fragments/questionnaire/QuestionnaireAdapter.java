@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -36,6 +37,10 @@ public class QuestionnaireAdapter extends RecyclerView.Adapter<QuestionnaireAdap
         PreparedQuestion preparedQuestion = preparedQuestions.get(position);
 
         holder.text.setText(preparedQuestion.getText());
+
+        QuestionnaireOptionAdapter adapter = new QuestionnaireOptionAdapter(context, preparedQuestion.getOptions());
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        holder.recyclerView.setAdapter(adapter);
     }
 
     @Override
