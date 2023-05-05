@@ -108,6 +108,11 @@ public class QuestionnaireFragment extends Fragment {
         }
 
         setupRecyclerView();
+
+        saveButton.setOnClickListener(v -> {
+            experienceDataHolder.addExperienceToOpera(operaId, viewModel.getQuestionnaire());
+            requireActivity().finish();
+        });
     }
 
     private void setupRecyclerView() {
