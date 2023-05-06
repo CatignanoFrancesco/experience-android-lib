@@ -6,6 +6,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -39,6 +42,7 @@ import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Pattern;
 import it.uniba.eculturetool.experience_lib.ui.PatternUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class PatternFragment extends Fragment {
 
@@ -53,6 +57,7 @@ public class PatternFragment extends Fragment {
     private GridView gridView;
     private PatternAdapter adapter;
     private Button saveButton, loadMatrixButton;
+    private Toolbar toolbar;
 
     public PatternFragment() {}
 
@@ -99,6 +104,11 @@ public class PatternFragment extends Fragment {
         gridView = view.findViewById(ui.patternFragmentUI.gridView);
         loadMatrixButton = view.findViewById(ui.patternFragmentUI.loadPatternButton);
         saveButton = view.findViewById(ui.patternFragmentUI.saveButton);
+        toolbar = view.findViewById(ui.patternFragmentUI.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.pattern_help);
 
         setMatrix();
 
