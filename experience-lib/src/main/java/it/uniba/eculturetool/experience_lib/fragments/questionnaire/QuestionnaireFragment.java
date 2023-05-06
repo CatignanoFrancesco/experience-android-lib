@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Questionnaire;
 import it.uniba.eculturetool.experience_lib.ui.QuestionnaireUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class QuestionnaireFragment extends Fragment {
     private final QuestionnaireUI ui = QuestionnaireUI.getInstance();
@@ -100,8 +102,17 @@ public class QuestionnaireFragment extends Fragment {
         saveButton = view.findViewById(ui.questionnaireFragmentUi.saveButton);
 
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        if(activity.getSupportActionBar() == null)
-            activity.setSupportActionBar(toolbar);
+        MenuHost menuHost = (MenuHost) requireActivity();
+
+        int helpMessageRes = 0;
+        if(viewModel.getQuestionnaire().getName().equalsIgnoreCase("sus"))
+            helpMessageRes = R.string.sus_help;
+        else if(viewModel.getQuestionnaire().getName().equalsIgnoreCase("sam"))
+            helpMessageRes = R.string.sam_help;
+        else
+            helpMessageRes = R.string.nasa_tlx_help;
+
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, helpMessageRes);
     }
 
     @Override
