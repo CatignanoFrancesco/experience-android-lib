@@ -72,6 +72,7 @@
     <string name="message_missing">Inserisci il messaggio</string>
     <string name="rfid_code_missing">Inserisci il codice RFID</string>
     <string name="rfid_code_wrong_format">Inserisci un codice RFID corretto</string>
+    <string name="rfid_list">Lista di RFID</string>
     <string name="pattern">Memorizza il pattern</string>
     <string name="touch_dot">Tocca i punti per specificare un pattern</string>
     <string name="dot_number_error">I punti selezionati devono essere almeno 3</string>

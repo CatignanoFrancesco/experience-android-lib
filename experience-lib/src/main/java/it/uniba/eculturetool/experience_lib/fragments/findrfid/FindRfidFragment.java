@@ -1,6 +1,8 @@
 package it.uniba.eculturetool.experience_lib.fragments.findrfid;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,15 +18,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
 import it.uniba.eculturetool.experience_lib.ExperienceEditorFragment;
 import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.R;
+import it.uniba.eculturetool.experience_lib.fragments.hittheenemy.HitTheEnemyFragment;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
+import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.ui.FindRfidUI;
 
 public class FindRfidFragment extends Fragment {
@@ -96,6 +113,8 @@ public class FindRfidFragment extends Fragment {
         setMessageEditText();
         setRfidEditText();
 
+        loadRfidButton.setOnClickListener(v -> loadRfid());
+
         saveButton.setOnClickListener(v -> {
             if (validate()) {
                 dataHolder.addExperienceToOpera(operaId, viewModel.getFindRfid().getValue());
@@ -112,12 +131,10 @@ public class FindRfidFragment extends Fragment {
 
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -159,5 +176,31 @@ public class FindRfidFragment extends Fragment {
 
         ExperienceEditorFragment fragment = (ExperienceEditorFragment) getChildFragmentManager().findFragmentById(ui.findRfidFragmentUi.experienceFragmentContainerView);
         return fragment.validate();
+    }
+
+    private void loadRfid() {
+        try(InputStream inputStream = getResources().openRawResource(R.raw.rfid_list)) {
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            String json = new String(buffer, StandardCharsets.UTF_8);
+
+            Type listMapType = new TypeToken<ArrayList<HashMap<String, String>>>() {}.getType();
+            List<Map<String, String>> recordList = new Gson().fromJson(json, listMapType);
+
+            String[] rfids = recordList.stream().map(record -> {
+                String key = (String) record.keySet().stream().findFirst().get();
+                String value = record.get(key);
+                return value + " - " + key;
+            }).collect(Collectors.toList()).toArray(new String[]{});
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.rfid_list)
+                    .setItems(rfids, (dialogInterface, i) -> rfidEditText.setText(recordList.get(i).keySet().stream().findFirst().get()))
+                    .setNegativeButton(R.string.cancel, null)
+                    .show();
+        }
+        catch (IOException e) {
+            return;
+        }
     }
 }
