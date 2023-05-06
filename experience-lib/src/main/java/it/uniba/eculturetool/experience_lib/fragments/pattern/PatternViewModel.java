@@ -20,6 +20,16 @@ public class PatternViewModel extends ViewModel {
 
     public void setMatrix(int[][] matrix) {
         pattern.getValue().setMatrixPattern(matrix);
+
+        // Reimposto il valore di max
+        int max = 0;
+        for(int i=0; i<matrix.length; i++) {
+            for(int j=0; j<matrix[i].length; j++) {
+                if(matrix[i][j] > max) max = matrix[i][j];
+            }
+        }
+
+        maxNum = max;
     }
 
     public int getMaxNum() {

@@ -9,6 +9,7 @@ public class PatternUI {
     public static class PatternFragmentUI {
         public int layout;
         public int experienceFragmentContainerView;
+        public int loadPatternButton;
         public int gridView;
         public int saveButton;
     }

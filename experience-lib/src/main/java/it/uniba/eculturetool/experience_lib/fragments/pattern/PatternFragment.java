@@ -38,7 +38,7 @@ public class PatternFragment extends Fragment {
     private final PatternUI ui = PatternUI.getInstance();
     private GridView gridView;
     private PatternAdapter adapter;
-    private Button saveButton;
+    private Button saveButton, loadMatrixButton;
 
     public PatternFragment() {}
 
@@ -83,6 +83,7 @@ public class PatternFragment extends Fragment {
         experienceViewModel.setExperience(viewModel.getPattern().getValue());
 
         gridView = view.findViewById(ui.patternFragmentUI.gridView);
+        loadMatrixButton = view.findViewById(ui.patternFragmentUI.loadPatternButton);
         saveButton = view.findViewById(ui.patternFragmentUI.saveButton);
 
         setMatrix();
