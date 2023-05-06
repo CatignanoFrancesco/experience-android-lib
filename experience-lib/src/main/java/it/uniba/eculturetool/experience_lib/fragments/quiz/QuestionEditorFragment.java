@@ -11,6 +11,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,6 +46,7 @@ import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.models.Answer;
 import it.uniba.eculturetool.experience_lib.models.Question;
 import it.uniba.eculturetool.experience_lib.ui.QuizUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class QuestionEditorFragment extends Fragment implements AnswerManager {
     private final QuizUI ui = QuizUI.getInstance();
@@ -55,6 +59,7 @@ public class QuestionEditorFragment extends Fragment implements AnswerManager {
     private RecyclerView recyclerView;
     private AnswerAdapter adapter;
     private Button saveButton;
+    private Toolbar toolbar;
 
     private QuizViewModel quizViewModel;
     private ActivityResultLauncher<Intent> pickPhoto;
@@ -99,6 +104,11 @@ public class QuestionEditorFragment extends Fragment implements AnswerManager {
         addImageButton = view.findViewById(ui.questionEditorFragmentUI.addQuestionImageButtonId);
         image = view.findViewById(ui.questionEditorFragmentUI.questionImageViewId);
         saveButton = view.findViewById(ui.questionEditorFragmentUI.saveButtonId);
+        toolbar = view.findViewById(ui.questionEditorFragmentUI.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.question_help);
     }
 
     @Override

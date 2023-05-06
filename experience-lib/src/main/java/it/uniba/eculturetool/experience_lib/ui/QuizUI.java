@@ -18,6 +18,7 @@ public class QuizUI {
     public static class QuizEditorFragmentUI {
         public int layout;
         public int experienceFragmentContainerViewId;
+        public int toolbar;
         public int addQuestionButtonId;
         public int questionsRecyclerViewId;
         public int noQuestionsTextViewId;
@@ -35,6 +36,7 @@ public class QuizUI {
     // QuestionEditorFragment
     public static class QuestionEditorFragmentUI {
         public int layout;
+        public int toolbar;
         public int pointsInputTextId;
         public int pointsTextViewId;
         public int questionInputTextId;

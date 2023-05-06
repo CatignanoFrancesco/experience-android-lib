@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +26,7 @@ import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.TimedExperienceEditorFragment;
 import it.uniba.eculturetool.experience_lib.models.Question;
 import it.uniba.eculturetool.experience_lib.ui.QuizUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class QuizEditorFragment extends Fragment {
     private final QuizUI ui = QuizUI.getInstance();
@@ -32,6 +36,7 @@ public class QuizEditorFragment extends Fragment {
     private RecyclerView quizRecyclerView;
     private QuizFragment quizFragment;
     private Button saveButton;
+    private Toolbar toolbar;
 
     private QuizViewModel quizViewModel;
     private ExperienceViewModel experienceViewModel;
@@ -63,6 +68,11 @@ public class QuizEditorFragment extends Fragment {
         addQuestionButton = view.findViewById(ui.quizEditorFragmentUI.addQuestionButtonId);
         quizRecyclerView = view.findViewById(ui.quizEditorFragmentUI.questionsRecyclerViewId);
         saveButton = view.findViewById(ui.quizEditorFragmentUI.quizSaveButtonId);
+        toolbar = view.findViewById(ui.quizEditorFragmentUI.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.quiz_help);
 
         addQuestionButton.setOnClickListener(v -> quizFragment.addQuestion());
         saveButton.setOnClickListener(v -> {
