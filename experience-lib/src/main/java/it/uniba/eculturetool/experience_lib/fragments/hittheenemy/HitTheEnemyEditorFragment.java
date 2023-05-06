@@ -13,6 +13,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -38,6 +41,7 @@ import it.uniba.eculturetool.experience_lib.ExperienceViewModel;
 import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemyItem;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class HitTheEnemyEditorFragment extends Fragment {
     private static final String KEY_HTE_ITEM_POSITION = "KEY_HTE_ITEM_POSITION";
@@ -50,6 +54,7 @@ public class HitTheEnemyEditorFragment extends Fragment {
     private Button addCharacterImageButton, addBackgroundImageButton, addEnemyImageButton, addHitImageButton, saveButton;
     private EditText characterNameEditText;
     private Slider characterSpeedSlider, hitSpeedSlider, hitResistanceSlider;
+    private Toolbar toolbar;
 
     private ActivityResultLauncher<Intent> pickPhoto;
 
@@ -133,6 +138,11 @@ public class HitTheEnemyEditorFragment extends Fragment {
         hitSpeedSlider = view.findViewById(ui.hitTheEnemyEditorUi.hitSpeedSlider);
         hitResistanceSlider = view.findViewById(ui.hitTheEnemyEditorUi.characterResistanceSlider);
         saveButton = view.findViewById(ui.hitTheEnemyEditorUi.saveButton);
+        toolbar = view.findViewById(ui.hitTheEnemyEditorUi.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.hit_the_enemy_item_help);
 
         loadData();
     }

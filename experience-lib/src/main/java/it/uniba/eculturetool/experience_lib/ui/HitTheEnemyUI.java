@@ -15,6 +15,7 @@ public class HitTheEnemyUI {
 
     public static class HitTheEnemyListUI {
         public int layout;
+        public int toolbar;
         public int recyclerViewId;
         public int addHitTheEnemyButton;
         public int saveButton;
@@ -30,6 +31,7 @@ public class HitTheEnemyUI {
 
     public static class HitTheEnemyEditorUI {
         public int layout;
+        public int toolbar;
         public int experienceEditorFragmentContainerView;
         public int characterImageView;
         public int addCharacterImageButton;

@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,10 +23,12 @@ import android.widget.Button;
 import java.util.Set;
 
 import it.uniba.eculturetool.experience_lib.ExperienceDataHolder;
+import it.uniba.eculturetool.experience_lib.R;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.ui.HitTheEnemyUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class HitTheEnemyListFragment extends Fragment {
     private final HitTheEnemyUI ui = HitTheEnemyUI.getInstance();
@@ -35,6 +40,7 @@ public class HitTheEnemyListFragment extends Fragment {
     private RecyclerView recyclerView;
     private HitTheEnemyAdapter adapter;
     private Button addHitTheEnemyButton, saveButton;
+    private Toolbar toolbar;
 
     public HitTheEnemyListFragment() {}
 
@@ -70,6 +76,11 @@ public class HitTheEnemyListFragment extends Fragment {
         addHitTheEnemyButton = view.findViewById(ui.hitTheEnemyListUi.addHitTheEnemyButton);
         recyclerView = view.findViewById(ui.hitTheEnemyListUi.recyclerViewId);
         saveButton = view.findViewById(ui.hitTheEnemyListUi.saveButton);
+        toolbar = view.findViewById(ui.hitTheEnemyListUi.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.hit_the_enemy_help);
 
         Set<Experience> experiences = experienceDataHolder.getExperienceByOperaId(operaId);
         if(experiences != null) {
