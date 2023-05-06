@@ -8,6 +8,7 @@ public class PuzzleUI {
     // PuzzleFragment
     public static class PuzzleFragmentUI {
         public int layout;
+        public int toolbar;
         public int experienceFragmentContainerViewId;
         public int puzzleImageViewId;
         public int explanationTextViewId;

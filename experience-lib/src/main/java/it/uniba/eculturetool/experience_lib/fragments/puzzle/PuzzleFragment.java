@@ -7,7 +7,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -41,6 +44,7 @@ import it.uniba.eculturetool.experience_lib.listeners.OnDataLoadListener;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.ui.PuzzleUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class PuzzleFragment extends Fragment {
 
@@ -55,6 +59,7 @@ public class PuzzleFragment extends Fragment {
     private TextView gridDimensionTextView;
     private SwitchCompat rotateSwitch;
     private Button saveButton;
+    private Toolbar toolbar;
 
     private PuzzleViewModel puzzleViewModel;
     private ExperienceViewModel experienceViewModel;
@@ -115,6 +120,11 @@ public class PuzzleFragment extends Fragment {
         gridDimensionTextView = view.findViewById(ui.puzzleFragmentUI.gridDimensionTextViewId);
         rotateSwitch = view.findViewById(ui.puzzleFragmentUI.rotateSwitchId);
         saveButton = view.findViewById(ui.puzzleFragmentUI.saveButtonId);
+        toolbar = view.findViewById(ui.puzzleFragmentUI.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.puzzle_help);
 
         Set<Experience> experiences = experienceDataHolder.getExperienceByOperaId(operaId);
         if(experiences != null) {
