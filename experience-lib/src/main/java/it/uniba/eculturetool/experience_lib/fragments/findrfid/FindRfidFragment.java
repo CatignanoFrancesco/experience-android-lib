@@ -38,9 +38,10 @@ public class FindRfidFragment extends Fragment {
 
     private EditText messageEditText;
     private EditText rfidEditText;
-    private Button saveButton;
+    private Button saveButton, loadRfidButton;
 
-    public FindRfidFragment() {}
+    public FindRfidFragment() {
+    }
 
     public static FindRfidFragment newInstance(String operaId, String experienceId) {
         FindRfidFragment fragment = new FindRfidFragment();
@@ -75,13 +76,14 @@ public class FindRfidFragment extends Fragment {
         messageEditText = view.findViewById(ui.findRfidFragmentUi.messageEditText);
         rfidEditText = view.findViewById(ui.findRfidFragmentUi.rfidCodeEditText);
         saveButton = view.findViewById(ui.findRfidFragmentUi.saveButton);
+        loadRfidButton = view.findViewById(ui.findRfidFragmentUi.loadRfidButton);
 
         // Caricamento dei dati
         viewModel = new ViewModelProvider(requireActivity()).get(FindRfidViewModel.class);
         experienceViewModel = new ViewModelProvider(requireActivity()).get(ExperienceViewModel.class);
 
         Set<Experience> experiences = dataHolder.getExperienceByOperaId(operaId);
-        if(experiences != null) {
+        if (experiences != null) {
             for (Experience experience : experiences) {
                 if (experience.getId().equals(experienceId)) {
                     viewModel.setFindRfid((FindRFID) experience);
@@ -95,7 +97,7 @@ public class FindRfidFragment extends Fragment {
         setRfidEditText();
 
         saveButton.setOnClickListener(v -> {
-            if(validate()) {
+            if (validate()) {
                 dataHolder.addExperienceToOpera(operaId, viewModel.getFindRfid().getValue());
                 requireActivity().finish();
             }
@@ -105,15 +107,17 @@ public class FindRfidFragment extends Fragment {
     private void setMessageEditText() {
         String message = viewModel.getFindRfid().getValue().getMessage();
 
-        if(message != null && !message.isEmpty())
+        if (message != null && !message.isEmpty())
             messageEditText.setText(message);
 
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -125,7 +129,7 @@ public class FindRfidFragment extends Fragment {
     private void setRfidEditText() {
         UUID rfidId = viewModel.getFindRfid().getValue().getRfidId();
 
-        if(rfidId != null && !rfidId.toString().isEmpty()) {
+        if (rfidId != null && !rfidId.toString().isEmpty()) {
             rfidEditText.setText(rfidId.toString());
         }
     }
@@ -133,13 +137,13 @@ public class FindRfidFragment extends Fragment {
     private boolean validate() {
         FindRFID fr = viewModel.getFindRfid().getValue();
 
-        if(messageEditText.getText().toString().isEmpty()) {
+        if (messageEditText.getText().toString().isEmpty()) {
             messageEditText.setError(getString(R.string.message_missing));
             messageEditText.requestFocus();
             return false;
         }
 
-        if(rfidEditText.getText().toString().isEmpty()) {
+        if (rfidEditText.getText().toString().isEmpty()) {
             rfidEditText.setError(getString(R.string.rfid_code_missing));
             rfidEditText.requestFocus();
             return false;
@@ -147,8 +151,7 @@ public class FindRfidFragment extends Fragment {
 
         try {
             fr.setRfidId(UUID.fromString(rfidEditText.getText().toString()));
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             rfidEditText.setError(getString(R.string.rfid_code_wrong_format));
             rfidEditText.requestFocus();
             return false;

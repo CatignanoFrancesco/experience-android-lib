@@ -9,6 +9,7 @@ public class FindRfidUI {
     public static class FindRfidFragmentUI {
         public int layout;
         public int experienceFragmentContainerView;
+        public int loadRfidButton;
         public int messageEditText;
         public int rfidCodeEditText;
         public int saveButton;
