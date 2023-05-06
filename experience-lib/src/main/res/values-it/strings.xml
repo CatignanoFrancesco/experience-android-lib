@@ -75,6 +75,12 @@
     <string name="rfid_list">Lista di RFID</string>
     <string name="pattern">Memorizza il pattern</string>
     <string name="touch_dot">Tocca i punti per specificare un pattern</string>
+    <string name="choose_pattern">Scegli il pattern</string>
+    <string-array name="pattern_difficulty">
+        <item>Livello 1 - Facile</item>
+        <item>Livello 2 - Medio</item>
+        <item>Livello 3 - Difficile</item>
+    </string-array>
     <string name="dot_number_error">I punti selezionati devono essere almeno 3</string>
     <string name="find_details">Trova i dettagli</string>
     <string name="tap_to_details">Clicca sull\'immagine per selezionare i dettagli</string>

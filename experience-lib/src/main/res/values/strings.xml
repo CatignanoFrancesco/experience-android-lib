@@ -80,6 +80,12 @@
     <string name="pattern">Memorize the pattern</string>
     <string name="touch_dot">Touch the dots to specify a pattern</string>
     <string name="dot_number_error">Selected dots should be at least 3</string>
+    <string name="choose_pattern">Choose the pattern</string>
+    <string-array name="pattern_difficulty">
+        <item>Level 1 - Easy</item>
+        <item>Level 2 - Medium</item>
+        <item>Level 3 - Hard</item>
+    </string-array>
     <string name="find_details">Find details</string>
     <string name="tap_to_details">Tap on the image to highlight the details</string>
     <string name="details_message_hint">Find the gothic columns</string>

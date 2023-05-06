@@ -1,5 +1,7 @@
 package it.uniba.eculturetool.experience_lib.fragments.pattern;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,18 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -88,6 +102,8 @@ public class PatternFragment extends Fragment {
 
         setMatrix();
 
+        loadMatrixButton.setOnClickListener(v -> loadPattern());
+
         saveButton.setOnClickListener(v -> {
             if(validate()) {
                 dataHolder.addExperienceToOpera(operaId, viewModel.getPattern().getValue());
@@ -104,6 +120,32 @@ public class PatternFragment extends Fragment {
         }
 
         gridView.setAdapter(adapter);
+    }
+
+    private void loadPattern() {
+        try(InputStream inputStream = getResources().openRawResource(R.raw.pattern_list)) {
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            String json = new String(buffer, StandardCharsets.UTF_8);
+
+            // Conversione del JSON
+            Gson gson = new Gson();
+            List<int[][]> matrixList = gson.fromJson(json, new TypeToken<List<int[][]>>(){}.getType());
+
+            // Dialogo
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.choose_pattern)
+                    .setItems(R.array.pattern_difficulty, (dialogInterface, i) -> {
+                        viewModel.setMatrix(matrixList.get(i));
+                        setMatrix();
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .show();
+        }
+        catch (IOException e) {
+            return;
+        }
     }
 
     private boolean validate() {
