@@ -111,6 +111,8 @@
     <string name="back">Back</string>
 
     <!-- Experience help -->
+    <string name="help_title">What is this?</string>
+    <string name="ok_understand">OK, I Understand</string>
     <string name="puzzle_help">Make a puzzle! Upload the image using the appropriate button. Scrolling down you can decide how many pieces it should have through the size of the grid. Attention, the puzzle will necessarily be square! Finally, decide whether or not to enable the rotation of the puzzle pieces to increase the difficulty or not. Click \"Save\" to save the Experience.</string>
     <string name="quiz_help">The quiz is a series of questions to ask the visitor in a certain amount of time. Add as many questions as you want using the appropriate \"Add question\" button. Click \"Save\" to save the Experience.</string>
     <string name="question_help">Create your question to insert in the quiz and decide how many points it should be worth. Use the text field to write the content of your question and possibly also add an image. Enter your answers via the \"Add an answer\" button. You get to decide what to write and even if that answer is correct. You have no limit on the number of correct or incorrect answers. Save your question and go back by pressing the \"Save\"</string> button
@@ -127,7 +129,7 @@
     <string name="nasa_tlx_help">The NASA-TLX (Task Load Index) is a subjective assessment tool that measures the mental workload perceived by users performing a specific task. Click on \"Save\" to save this Experience.</string>
     <string name="experience_help">In this Experience you can indicate the difficulty and the score to the user. Choose the difficulty out of 4 values: low, medium, high and impossible. Also decide the maximum score that the user will achieve upon completing this Experience.</string>
     <string name="timed_experience_help">In this Experience you can tell the user the difficulty, the score and the maximum time. Choose the difficulty out of 4 values: low, medium, high and impossible. You also decide the maximum score that the user will achieve upon completing this Experience and also choose the time. The score will vary depending on how long it took the user to complete the experience.</string>
-    <string name="bolcked_timed_experience_help">In this Experience you can tell the user the difficulty, the score and the maximum time. Choose the difficulty out of 4 values: low, medium, high and impossible. The maximum score will be calculated from the sum of the single scores of each question. The score will vary depending on how long it took the user to complete the experience.</string>
+    <string name="blocked_timed_experience_help">In this Experience you can tell the user the difficulty, the score and the maximum time. Choose the difficulty out of 4 values: low, medium, high and impossible. The maximum score will be calculated from the sum of the single scores of each question. The score will vary depending on how long it took the user to complete the experience.</string>
 
     <string name="msg_internet_non_disponibile">Internet is not available</string>
 </resources>

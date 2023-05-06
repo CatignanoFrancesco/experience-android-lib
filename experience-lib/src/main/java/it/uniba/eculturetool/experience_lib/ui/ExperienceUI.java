@@ -12,6 +12,7 @@ public class ExperienceUI {
         public int layout;
         public int pointsInputTextId;
         public int pointsTextViewId;
+        public int helpButton;
         public int difficultySliderId;
         public int difficultyValueTextViewId;
     }
@@ -19,6 +20,7 @@ public class ExperienceUI {
     // TimedExperienceEditor
     public static class TimedExperienceFragmentUI {
         public int layout;
+        public int helpButton;
         public int minutesNumberPicker;
         public int secondsNumberPicker;
     }

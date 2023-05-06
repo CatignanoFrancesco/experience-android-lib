@@ -1,6 +1,5 @@
 package it.uniba.eculturetool.experience_lib;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.slider.Slider;
@@ -20,7 +20,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import it.uniba.eculturetool.experience_lib.models.Difficulty;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Quiz;
+import it.uniba.eculturetool.experience_lib.models.TimedExperience;
 import it.uniba.eculturetool.experience_lib.ui.ExperienceUI;
+import it.uniba.eculturetool.experience_lib.utils.HelpDialog;
 
 public class ExperienceEditorFragment extends Fragment {
     public static final String KEY_EXPERIENCE_ID = "EXP_ID";
@@ -34,6 +36,7 @@ public class ExperienceEditorFragment extends Fragment {
     private TextInputEditText pointsTextInput;
     private Slider difficultySlider;
     private TextView difficultyValue;
+    private ImageButton helpButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class ExperienceEditorFragment extends Fragment {
         pointsTextInput = (TextInputEditText) view.findViewById(ui.experienceEditorFragmentUI.pointsInputTextId);
         difficultySlider = (Slider) view.findViewById(ui.experienceEditorFragmentUI.difficultySliderId);
         difficultyValue = (TextView) view.findViewById(ui.experienceEditorFragmentUI.difficultyValueTextViewId);
+        helpButton = view.findViewById(ui.experienceEditorFragmentUI.helpButton);
     }
 
     @Override
@@ -56,17 +60,25 @@ public class ExperienceEditorFragment extends Fragment {
 
         setPoints();
         setDifficulty();
+
+        helpButton.setOnClickListener(v -> {
+            if(experience instanceof TimedExperience) {
+                if(experience instanceof Quiz)
+                    HelpDialog.show(requireContext(), R.string.blocked_timed_experience_help);
+                else
+                    HelpDialog.show(requireContext(), R.string.timed_experience_help);
+            } else {
+                HelpDialog.show(requireContext(), R.string.experience_help);
+            }
+        });
     }
 
     private void setPoints() {
         experience = viewModel.getExperience().getValue();
         if(experience == null) return;
 
-        viewModel.getExperience().observe(requireActivity(), new Observer<Experience>() {
-            @Override
-            public void onChanged(Experience experience) {
-                if(experience instanceof Quiz) pointsTextInput.setEnabled(false);
-            }
+        viewModel.getExperience().observe(requireActivity(), experience -> {
+            if(experience instanceof Quiz) pointsTextInput.setEnabled(false);
         });
 
         pointsTextInput.addTextChangedListener(new TextWatcher() {

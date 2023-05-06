@@ -106,6 +106,8 @@
     <string name="back">Indietro</string>
 
     <!-- Experience help -->
+    <string name="help_title">Cos\'è questo?</string>
+    <string name="ok_understand">OK, ho capito</string>
     <string name="puzzle_help">Realizza un puzzle! Carica l\'immagine tramite l\'apposito pulsante. Scorrendo in basso potrai decidere quanti pezzi deve avere attraverso la dimensione della griglia. Attenzione, il puzzle sarà necessariamente quadrato! Infine, decidi se abilitare o meno la rotazione dei pezzi del puzzle per aumentarne o meno la difficoltà. Clicca su \"Salva\" per salvare l\'Experience.</string>
     <string name="quiz_help">Il quiz è una serie di domande da porre al visitatore in un certo lasso di tempo. Aggiungi quante domande vuoi attraverso l\'apposito pulsante \"Aggiungi domanda\". Clicca su \"Salva\" per salvare l\'Experience.</string>
     <string name="question_help">Crea la tua domanda da inserire nel quiz e decidi quanti punti deve valere. Usa il campo di testo per scrivere il contenuto della tua domanda ed, eventualmente aggiungi anche un\'immagine. Inserisci le risposte attraverso il pulsante \"Aggiungi una risposta\". Puoi decidere cosa scrivere e anche se quella risposta è corretta. Non hai limiti sul numero di risposte corrette o errate. Salva la tua domanda e torna indietro premendo il pulsante \"Salva\"</string>
@@ -122,7 +124,7 @@
     <string name="nasa_tlx_help">Il NASA-TLX (Task Load Index) è uno strumento di valutazione soggettiva che misura la carico di lavoro mentale percepito dagli utenti che svolgono un compito specifico. Clicca su \"Salva\" per salvare questa Experience.</string>
     <string name="experience_help">In questa Experience puoi indicare all\'utente la difficoltà ed il punteggio. Scegli la difficoltà su 4 valori: bassa, media, alta e impossibile. Decidi anche il punteggio massimo che l\'utente conseguirà al completamento di questa Experience.</string>
     <string name="timed_experience_help">In questa Experience puoi indicare all\'utente la difficoltà, il punteggio ed il tempo massimo. Scegli la difficoltà su 4 valori: bassa, media, alta e impossibile. Decidi anche il punteggio massimo che l\'utente conseguirà al completamento di questa Experience e scegli anche il tempo. Il punteggio varierà a seconda di quanto tempo l\'utente ha impiegato per completare l\'Experience.</string>
-    <string name="bolcked_timed_experience_help">In questa Experience puoi indicare all\'utente la difficoltà, il punteggio ed il tempo massimo. Scegli la difficoltà su 4 valori: bassa, media, alta e impossibile. Il punteggio massimo sarà calcolato dalla somma dei singoli punteggi di ciascuna domanda. Il punteggio varierà a seconda di quanto tempo l\'utente ha impiegato per completare l\'Experience.</string>
+    <string name="blocked_timed_experience_help">In questa Experience puoi indicare all\'utente la difficoltà, il punteggio ed il tempo massimo. Scegli la difficoltà su 4 valori: bassa, media, alta e impossibile. Il punteggio massimo sarà calcolato dalla somma dei singoli punteggi di ciascuna domanda. Il punteggio varierà a seconda di quanto tempo l\'utente ha impiegato per completare l\'Experience.</string>
 
     <!-- Tag -->
     <string name="msg_internet_non_disponibile">Internet non è disponibile</string>
