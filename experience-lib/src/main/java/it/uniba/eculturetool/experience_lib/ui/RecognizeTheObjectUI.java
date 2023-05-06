@@ -8,6 +8,7 @@ public class RecognizeTheObjectUI {
 
     public static class RecognizeTheObjectFieldsUI {
         public int layout;
+        public int toolbar;
         public int experienceFragmentContainerView;
         public int referenceImageView;
         public int addReferenceImageButton;

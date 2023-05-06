@@ -13,6 +13,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -39,6 +42,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.RecognizeTheObject;
 import it.uniba.eculturetool.experience_lib.ui.RecognizeTheObjectUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class RecognizeTheObjectFragment extends Fragment {
     private final RecognizeTheObjectUI ui = RecognizeTheObjectUI.getInstance();
@@ -52,6 +56,7 @@ public class RecognizeTheObjectFragment extends Fragment {
     private ImageView referenceImage;
     private Button addReferenceImageButton, saveButton;
     private EditText descriptionEditText, modelNameEditText;
+    private Toolbar toolbar;
     private ActivityResultLauncher<Intent> pickPhoto;
 
     public RecognizeTheObjectFragment() {}
@@ -105,6 +110,11 @@ public class RecognizeTheObjectFragment extends Fragment {
         descriptionEditText = view.findViewById(ui.recognizeTheObjectFieldsUi.descriptionEditText);
         modelNameEditText = view.findViewById(ui.recognizeTheObjectFieldsUi.modelNameEditText);
         saveButton = view.findViewById(ui.recognizeTheObjectFieldsUi.saveButton);
+        toolbar = view.findViewById(ui.recognizeTheObjectFieldsUi.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.recognize_object_help);
 
         Set<Experience> experiences = dataHolder.getExperienceByOperaId(operaId);
         if(experiences != null) {
