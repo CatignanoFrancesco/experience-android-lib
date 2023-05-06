@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -97,6 +98,10 @@ public class QuestionnaireFragment extends Fragment {
         toolbar = view.findViewById(ui.questionnaireFragmentUi.toolbar);
         recyclerView = view.findViewById(ui.questionnaireFragmentUi.questionsRecyclerView);
         saveButton = view.findViewById(ui.questionnaireFragmentUi.saveButton);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        if(activity.getSupportActionBar() == null)
+            activity.setSupportActionBar(toolbar);
     }
 
     @Override
