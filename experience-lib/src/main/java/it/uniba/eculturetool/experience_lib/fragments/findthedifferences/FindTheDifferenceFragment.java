@@ -2,6 +2,9 @@ package it.uniba.eculturetool.experience_lib.fragments.findthedifferences;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -18,6 +21,7 @@ import it.uniba.eculturetool.experience_lib.models.Coordinate;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindTheDifference;
 import it.uniba.eculturetool.experience_lib.ui.FindTheDifferenceUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -70,6 +74,7 @@ public class FindTheDifferenceFragment extends Fragment {
     private ImageView originalImageView, differentImageView;
     private Bitmap differentBitmap;
     private Button addOriginalImageButton, addDifferentImageButton, saveButton;
+    private Toolbar toolbar;
     private ActivityResultLauncher<Intent> pickPhoto;
 
     private FindTheDifferenceViewModel ftdViewModel;
@@ -134,6 +139,11 @@ public class FindTheDifferenceFragment extends Fragment {
         addOriginalImageButton = view.findViewById(ui.findTheDifferenceFragmentUI.originalAddImageButton);
         addDifferentImageButton = view.findViewById(ui.findTheDifferenceFragmentUI.differentAddImageButton);
         saveButton = view.findViewById(ui.findTheDifferenceFragmentUI.saveButton);
+        toolbar = view.findViewById(ui.findTheDifferenceFragmentUI.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.ftd_help);
 
         Set<Experience> experiences = dataHolder.getExperienceByOperaId(operaId);
         if(experiences != null) {

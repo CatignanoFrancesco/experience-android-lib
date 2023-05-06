@@ -7,6 +7,7 @@ public class FindTheDifferenceUI {
 
     public static class FindTheDifferenceFragmentUI {
         public int layout;
+        public int toolbar;
         public int experienceFragmentContainerView;
         public int originalImageView;
         public int originalAddImageButton;
