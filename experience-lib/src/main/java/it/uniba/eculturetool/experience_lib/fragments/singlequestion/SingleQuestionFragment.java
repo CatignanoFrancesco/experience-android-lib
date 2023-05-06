@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +41,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.Puzzle;
 import it.uniba.eculturetool.experience_lib.models.SingleQuestion;
 import it.uniba.eculturetool.experience_lib.ui.SingleQuestionUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class SingleQuestionFragment extends Fragment implements AnswerManager {
     private final SingleQuestionUI ui = SingleQuestionUI.getInstance();
@@ -52,6 +56,7 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
     private RecyclerView answersRecyclerView;
     private AnswerAdapter adapter;
     private Button saveButton, addAnswerButton;
+    private Toolbar toolbar;
 
     public SingleQuestionFragment() {}
 
@@ -100,6 +105,11 @@ public class SingleQuestionFragment extends Fragment implements AnswerManager {
         answersRecyclerView = view.findViewById(ui.singleQuestionEditorUi.answersRecyclerViewId);
         addAnswerButton = view.findViewById(ui.singleQuestionEditorUi.addAnswerButtonId);
         saveButton = view.findViewById(ui.singleQuestionEditorUi.saveButtonId);
+        toolbar = view.findViewById(ui.singleQuestionEditorUi.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.single_question_help);
     }
 
     @Override

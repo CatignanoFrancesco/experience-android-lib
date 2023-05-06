@@ -8,6 +8,7 @@ public class SingleQuestionUI {
     // Question editor
     public static class SingleQuestionEditorUI {
         public int layout;
+        public int toolbar;
         public int experienceFragmentContainerViewId;
         public int questionEditText;
         public int addAnswerButtonId;
