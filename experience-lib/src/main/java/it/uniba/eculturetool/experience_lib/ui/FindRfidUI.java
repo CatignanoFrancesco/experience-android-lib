@@ -8,6 +8,7 @@ public class FindRfidUI {
     // Fragment
     public static class FindRfidFragmentUI {
         public int layout;
+        public int toolbar;
         public int experienceFragmentContainerView;
         public int loadRfidButton;
         public int messageEditText;

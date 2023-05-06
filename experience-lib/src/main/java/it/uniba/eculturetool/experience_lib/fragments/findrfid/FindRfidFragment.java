@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -43,6 +46,7 @@ import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindRFID;
 import it.uniba.eculturetool.experience_lib.models.hittheenemy.HitTheEnemy;
 import it.uniba.eculturetool.experience_lib.ui.FindRfidUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class FindRfidFragment extends Fragment {
     private final FindRfidUI ui = FindRfidUI.getInstance();
@@ -56,6 +60,7 @@ public class FindRfidFragment extends Fragment {
     private EditText messageEditText;
     private EditText rfidEditText;
     private Button saveButton, loadRfidButton;
+    private Toolbar toolbar;
 
     public FindRfidFragment() {
     }
@@ -94,6 +99,11 @@ public class FindRfidFragment extends Fragment {
         rfidEditText = view.findViewById(ui.findRfidFragmentUi.rfidCodeEditText);
         saveButton = view.findViewById(ui.findRfidFragmentUi.saveButton);
         loadRfidButton = view.findViewById(ui.findRfidFragmentUi.loadRfidButton);
+        toolbar = view.findViewById(ui.findRfidFragmentUi.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.find_rfid_help);
 
         // Caricamento dei dati
         viewModel = new ViewModelProvider(requireActivity()).get(FindRfidViewModel.class);
