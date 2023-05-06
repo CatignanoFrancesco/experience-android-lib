@@ -7,6 +7,7 @@ public class FindDetailsUI {
 
     public static class FindDetailsFragmentUI {
         public int layout;
+        public int toolbar;
         public int experienceFragmentContainerView;
         public int messageEditText;
         public int detailsImageView;

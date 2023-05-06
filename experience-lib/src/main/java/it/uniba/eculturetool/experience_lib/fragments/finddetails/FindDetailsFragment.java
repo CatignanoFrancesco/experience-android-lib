@@ -18,6 +18,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuHost;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -57,6 +60,7 @@ import it.uniba.eculturetool.experience_lib.models.Coordinate;
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
 import it.uniba.eculturetool.experience_lib.ui.FindDetailsUI;
+import it.uniba.eculturetool.experience_lib.utils.ToolbarManager;
 
 public class FindDetailsFragment extends Fragment {
     private static final int MARGIN = 20;
@@ -70,6 +74,7 @@ public class FindDetailsFragment extends Fragment {
     private Bitmap bitmap;
     private Button addImageButton;
     private Button saveButton;
+    private Toolbar toolbar;
 
     private final ExperienceDataHolder experienceDataHolder = ExperienceDataHolder.getInstance();
     private FindDetailsViewModel viewModel;
@@ -125,6 +130,11 @@ public class FindDetailsFragment extends Fragment {
         imageView = view.findViewById(ui.findDetailsFragmentUI.detailsImageView);
         addImageButton = view.findViewById(ui.findDetailsFragmentUI.addImageButton);
         saveButton = view.findViewById(ui.findDetailsFragmentUI.saveButton);
+        toolbar = view.findViewById(ui.findDetailsFragmentUI.toolbar);
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, R.string.find_details_help);
 
         Set<Experience> experiences = experienceDataHolder.getExperienceByOperaId(operaId);
         if(experiences != null) {
