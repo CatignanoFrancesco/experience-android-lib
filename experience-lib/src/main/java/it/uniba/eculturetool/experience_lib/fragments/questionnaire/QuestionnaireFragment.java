@@ -100,19 +100,6 @@ public class QuestionnaireFragment extends Fragment {
         toolbar = view.findViewById(ui.questionnaireFragmentUi.toolbar);
         recyclerView = view.findViewById(ui.questionnaireFragmentUi.questionsRecyclerView);
         saveButton = view.findViewById(ui.questionnaireFragmentUi.saveButton);
-
-        AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        MenuHost menuHost = (MenuHost) requireActivity();
-
-        int helpMessageRes = 0;
-        if(viewModel.getQuestionnaire().getName().equalsIgnoreCase("sus"))
-            helpMessageRes = R.string.sus_help;
-        else if(viewModel.getQuestionnaire().getName().equalsIgnoreCase("sam"))
-            helpMessageRes = R.string.sam_help;
-        else
-            helpMessageRes = R.string.nasa_tlx_help;
-
-        ToolbarManager.setIcons(toolbar, activity, menuHost, this, helpMessageRes);
     }
 
     @Override
@@ -122,8 +109,11 @@ public class QuestionnaireFragment extends Fragment {
         if(viewModel.getQuestionnaire().getName() == null) {
             chooseQuestionnaireDialog(questionnaire -> {
                 viewModel.setQuestionnaire(questionnaire);
+                setupToolbar();
                 setupRecyclerView();
             });
+        } else {
+            setupToolbar();
         }
 
         setupRecyclerView();
@@ -170,5 +160,20 @@ public class QuestionnaireFragment extends Fragment {
                     dialogInterface.dismiss();
                     requireActivity().finish();
                 }).show();
+    }
+
+    private void setupToolbar() {
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        MenuHost menuHost = (MenuHost) requireActivity();
+
+        int helpMessageRes;
+        if(viewModel.getQuestionnaire().getName().equalsIgnoreCase("sus"))
+            helpMessageRes = R.string.sus_help;
+        else if(viewModel.getQuestionnaire().getName().equalsIgnoreCase("sam"))
+            helpMessageRes = R.string.sam_help;
+        else
+            helpMessageRes = R.string.nasa_tlx_help;
+
+        ToolbarManager.setIcons(toolbar, activity, menuHost, this, helpMessageRes);
     }
 }
