@@ -17,6 +17,7 @@ public class Question {
     private transient Bitmap image;
     private Set<Answer> answers;
     private boolean hasImage = false;
+    private String urlImage;
 
     public Question(String id, String questionText, int points, Set<Answer> answers, boolean hasImage, Bitmap image) {
         this.id = id;
@@ -94,6 +95,14 @@ public class Question {
 
     public boolean hasImage() {
         return hasImage;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 
     @Override

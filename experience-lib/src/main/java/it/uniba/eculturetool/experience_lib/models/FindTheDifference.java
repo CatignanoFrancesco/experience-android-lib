@@ -9,6 +9,9 @@ public class FindTheDifference extends Experience {
     private transient Bitmap differentImage;
     private List<Coordinate> differencesCoordinates;
 
+    private String urlOriginalImage;
+    private String urlDifferentImage;
+
     public FindTheDifference(String id, Difficulty difficulty, int points) {
         super(id, difficulty, points);
     }
@@ -43,5 +46,21 @@ public class FindTheDifference extends Experience {
 
     public void setDifferentImage(Bitmap differentImage) {
         this.differentImage = differentImage;
+    }
+
+    public String getUrlOriginalImage() {
+        return urlOriginalImage;
+    }
+
+    public void setUrlOriginalImage(String urlOriginalImage) {
+        this.urlOriginalImage = urlOriginalImage;
+    }
+
+    public String getUrlDifferentImage() {
+        return urlDifferentImage;
+    }
+
+    public void setUrlDifferentImage(String urlDifferentImage) {
+        this.urlDifferentImage = urlDifferentImage;
     }
 }

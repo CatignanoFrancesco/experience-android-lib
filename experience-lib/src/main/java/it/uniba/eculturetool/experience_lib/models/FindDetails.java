@@ -10,6 +10,7 @@ public class FindDetails extends Experience {
     private transient Bitmap image;
     private List<Coordinate> coordinates;
     private String message;
+    private String urlImage;
 
     public FindDetails(String id, Difficulty difficulty, int points) {
         super(id, difficulty, points);
@@ -41,5 +42,13 @@ public class FindDetails extends Experience {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

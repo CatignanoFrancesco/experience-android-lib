@@ -6,6 +6,7 @@ public class Puzzle extends Experience {
     private transient Bitmap image;
     private int gridDimension;
     private boolean rotationEnabled;
+    private String urlImage;
 
     public Puzzle(String id, Difficulty difficulty, int points) {
         super(id, difficulty, points);
@@ -41,5 +42,13 @@ public class Puzzle extends Experience {
 
     public void setRotationEnabled(boolean rotationEnabled) {
         this.rotationEnabled = rotationEnabled;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }
