@@ -1,11 +1,16 @@
 package it.uniba.eculturetool.experience_lib;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import it.uniba.eculturetool.experience_lib.models.Experience;
 import it.uniba.eculturetool.experience_lib.models.FindDetails;
@@ -23,62 +28,67 @@ public class AddExperienceAlertDialog {
 
     private AddExperienceAlertDialog() {}
 
-    public static void show(Context context, List<Experience> addedExperiences, Consumer<Experience> onOkClick, Runnable onImportClick) {
-        String puzzle = context.getString(R.string.puzzle);
-        String quiz = context.getString(R.string.quiz);
-        String findTheDifference = context.getString(R.string.find_the_difference);
-        String pattern = context.getString(R.string.pattern);
-        String findRfid = context.getString(R.string.find_rfid);
-        String findDetails = context.getString(R.string.find_details);
-        String singleQuestion = context.getString(R.string.single_question);
-        String hitTheEnemy = context.getString(R.string.hit_the_enemy);
-        String recognizeTheObject = context.getString(R.string.recognize_the_object);
-        String questionnaire = context.getString(R.string.questionnaire);
+    /**
+     * Mostra un dialog per scegliere quale experience aggiungere
+     * @param context Il context
+     * @param onOkClick Listener del click dell'experience
+     * @param onImportClick Listener del click di importazione
+     */
+    public static void show(Context context, Consumer<Experience> onOkClick, Runnable onImportClick) {
+        show(context, null, onOkClick, onImportClick);
+    }
+
+    /**
+     * Mostra un dialog per scegliere quale experience aggiungere
+     * @param context Il context
+     * @param filter Un filtro per mostrare solo alcune experience. Basta inserire nella lista le classi di experience che si vogliono mostrare. Passare un valore nullo o una lista vuota per mostrarle tutte
+     * @param onOkClick Listener del click dell'experience
+     * @param onImportClick Listener del click di importazione
+     */
+    public static void show(Context context, @Nullable List<Class<? extends Experience>> filter, Consumer<Experience> onOkClick, Runnable onImportClick) {
+        final List<ExperienceCouple> couples = new ArrayList<>();
+        couples.add(new ExperienceCouple(context.getString(R.string.puzzle), new Puzzle()));
+        couples.add(new ExperienceCouple(context.getString(R.string.quiz), new Quiz()));
+        couples.add(new ExperienceCouple(context.getString(R.string.find_the_difference), new FindTheDifference()));
+        couples.add(new ExperienceCouple(context.getString(R.string.pattern), new Pattern()));
+        couples.add(new ExperienceCouple(context.getString(R.string.find_rfid), new FindRFID()));
+        couples.add(new ExperienceCouple(context.getString(R.string.find_details), new FindDetails()));
+        couples.add(new ExperienceCouple(context.getString(R.string.single_question), new SingleQuestion()));
+        couples.add(new ExperienceCouple(context.getString(R.string.hit_the_enemy), new HitTheEnemy()));
+        couples.add(new ExperienceCouple(context.getString(R.string.recognize_the_object), new RecognizeTheObject()));
+        couples.add(new ExperienceCouple(context.getString(R.string.questionnaire), new Questionnaire()));
+        Log.d("BLABLA", "show: " + couples);
+
+        // Preparo l'array con i nomi
+        String[] experienceNames;
+        if(filter != null && !filter.isEmpty()) {
+            List<ExperienceCouple> temp = couples.stream().filter(couple -> filter.contains(couple.experience.getClass())).collect(Collectors.toList());
+            couples.clear();
+            couples.addAll(temp);
+        }
+        Log.d("BLABLA", "show: " + couples);
+
+        experienceNames = couples.stream().map(couple -> couple.name).collect(Collectors.toList()).toArray(new String[] {});
+        Log.d("BLABLA", "show: " + Arrays.toString(experienceNames));
 
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.add_experience_title))
                 .setItems(
-                        new String[]{puzzle, quiz, findTheDifference, pattern, findRfid, findDetails, singleQuestion, hitTheEnemy, recognizeTheObject, questionnaire},
-                        (dialogInterface, i) -> {
-                            Experience experience;
-                            switch (i) {
-                                case 0:
-                                    experience = new Puzzle();
-                                    break;
-                                case 1:
-                                    experience = new Quiz();
-                                    break;
-                                case 2:
-                                    experience = new FindTheDifference();
-                                    break;
-                                case 3:
-                                    experience = new Pattern();
-                                    break;
-                                case 4:
-                                    experience = new FindRFID();
-                                    break;
-                                case 5:
-                                    experience = new FindDetails();
-                                    break;
-                                case 6:
-                                    experience = new SingleQuestion();
-                                    break;
-                                case 7:
-                                    experience = new HitTheEnemy();
-                                    break;
-                                case 8:
-                                    experience = new RecognizeTheObject();
-                                    break;
-                                case 9:
-                                    experience = new Questionnaire();
-                                    break;
-                                default: experience = null;
-                            }
-
-                            onOkClick.accept(experience);
-                        }
+                        experienceNames,
+                        (dialogInterface, i) -> onOkClick.accept(couples.get(i).experience)
                 )
                 .setNeutralButton(context.getString(R.string.import_experience), ((dialogInterface, i) -> onImportClick.run()))
                 .show();
+    }
+
+
+    static class ExperienceCouple {
+        String name;
+        Experience experience;
+
+        ExperienceCouple(String name, Experience experience) {
+            this.name = name;
+            this.experience = experience;
+        }
     }
 }
