@@ -57,7 +57,6 @@ public class AddExperienceAlertDialog {
         couples.add(new ExperienceCouple(context.getString(R.string.hit_the_enemy), new HitTheEnemy()));
         couples.add(new ExperienceCouple(context.getString(R.string.recognize_the_object), new RecognizeTheObject()));
         couples.add(new ExperienceCouple(context.getString(R.string.questionnaire), new Questionnaire()));
-        Log.d("BLABLA", "show: " + couples);
 
         // Preparo l'array con i nomi
         String[] experienceNames;
@@ -66,10 +65,7 @@ public class AddExperienceAlertDialog {
             couples.clear();
             couples.addAll(temp);
         }
-        Log.d("BLABLA", "show: " + couples);
-
         experienceNames = couples.stream().map(couple -> couple.name).collect(Collectors.toList()).toArray(new String[] {});
-        Log.d("BLABLA", "show: " + Arrays.toString(experienceNames));
 
         new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.add_experience_title))
