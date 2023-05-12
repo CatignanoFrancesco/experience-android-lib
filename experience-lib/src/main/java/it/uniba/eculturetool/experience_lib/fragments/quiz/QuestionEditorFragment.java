@@ -137,7 +137,6 @@ public class QuestionEditorFragment extends Fragment implements AnswerManager {
     public void onAnswerCreated(Answer answer) {
         quizViewModel.addAnswer(answer);
         adapter.addAnswer(answer);
-        adapter.notifyDataSetChanged();
     }
 
     private void setQuestionsText() {
